@@ -637,130 +637,20 @@ body {
     <div class="header-subtitle">嚴選高酵營養素・按時補給・Google 試算表雲端同步</div>
   </div>
 
-  <!-- Top Navigation Tabs -->
+  <!-- Top Navigation Tabs (食譜在前面) -->
   <div class="nav-tabs">
-    <div class="nav-tab active" id="tab-btn-tracker" onclick="switchTab('tracker')">
-      📋 每日服用打卡
-    </div>
-    <div class="nav-tab" id="tab-btn-recipe" onclick="switchTab('recipe')">
+    <div class="nav-tab active" id="tab-btn-recipe" onclick="switchTab('recipe')">
       📖 食譜調配指南
     </div>
-  </div>
-
-  <!-- =========================================================
-       TAB 1 (預設首頁): 每日服用打卡專屬分頁 (超好點選！)
-       ========================================================= -->
-  <div class="tab-content active" id="tab-content-tracker">
-    <div class="tracker-container">
-      
-      <div class="tracker-header">
-        <div class="tracker-title">📅 今日打卡清單</div>
-        <div class="date-controls">
-          <button class="date-btn" onclick="changeDate(-1)">◀ 前一天</button>
-          <input type="date" id="tracker-date" class="date-picker-input" onchange="onDateChanged()">
-          <button class="date-btn" onclick="changeDate(1)">後一天 ▶</button>
-        </div>
-      </div>
-
-      <div class="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
-        <div class="progress-text" id="progress-text">今日達成率 0% (0/9)</div>
-      </div>
-
-      <div class="tracker-list" id="tracker-list">
-        
-        <div class="tracker-card-item" data-key="task_0" onclick="toggleTask('task_0', '01.早餐 優蛋白+三果汁')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 07:30 早餐時段</div>
-            <div class="tracker-item-title">🌅 早餐 優蛋白 2匙 ＋ 三果汁各 30cc 奶昔</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_1" onclick="toggleTask('task_1', '02.早餐後 威特倍 1包')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 08:45 早餐後</div>
-            <div class="tracker-item-title">💊 早餐後 威特倍（VITAPAK）1 包</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_2" onclick="toggleTask('task_2', '03.上午 葉綠飲大水壺')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 09:30 上午補水</div>
-            <div class="tracker-item-title">🍃 上午 葉綠飲隨身包 1包 ＋ 1000cc 大水壺</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_3" onclick="toggleTask('task_3', '04.午餐前 舒益纖+穩控')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 11:45 午餐前 30 分鐘</div>
-            <div class="tracker-item-title">🥗 午餐前 舒益纖 1包 ＋ 穩控 1包（飽足雙搭）</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_4" onclick="toggleTask('task_4', '05.午餐 原型輕食7分飽')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 12:15 午餐時段</div>
-            <div class="tracker-item-title">🍽️ 午餐 原型輕食 7 分飽（蛋白質➔蔬菜➔澱粉）</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_5" onclick="toggleTask('task_5', '06.午餐後 魚油+利維可+威特倍')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 13:00 午餐後</div>
-            <div class="tracker-item-title">✨ 午餐後 魚油 2顆 ＋ 利維可 3顆 ＋ 威特倍 1包</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_6" onclick="toggleTask('task_6', '07.下午茶 One Pack Juice')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 15:30 下午茶時段</div>
-            <div class="tracker-item-title">⚡ 下午茶 One Pack Juice（普精耐2+普益康2+紅能量1）</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_7" onclick="toggleTask('task_7', '08.晚餐前 益生菌 1包')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 18:00 晚餐前</div>
-            <div class="tracker-item-title">🍬 晚餐前 植酵複合益生菌 1包（直接倒嘴巴吃）</div>
-          </div>
-        </div>
-
-        <div class="tracker-card-item" data-key="task_8" onclick="toggleTask('task_8', '09.睡前 果然鎂+舒眠蛋白')">
-          <div class="custom-checkbox"></div>
-          <div class="tracker-item-info">
-            <div class="tracker-item-time">⏰ 22:30 睡前舒緩</div>
-            <div class="tracker-item-title">🌙 睡前 果然鎂 2顆 ＋ 全植舒眠優蛋白 1包</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="tracker-actions">
-        <div class="sync-status-badge" id="cloud-save-status">
-          🟢 雲端試算表已連線同步
-        </div>
-        <div class="action-buttons-group">
-          <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 同步雲端</button>
-          <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製打卡</button>
-          <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置打卡</button>
-        </div>
-      </div>
-
+    <div class="nav-tab" id="tab-btn-tracker" onclick="switchTab('tracker')">
+      📋 每日服用打卡
     </div>
   </div>
 
   <!-- =========================================================
-       TAB 2: 可愛食譜調配指南與手牽手圖鑑
+       TAB 1 (預設首頁): 可愛食譜調配指南與手牽手圖鑑
        ========================================================= -->
-  <div class="tab-content" id="tab-content-recipe">
+  <div class="tab-content active" id="tab-content-recipe">
     
     <div class="diet-principles">
       <div class="principle-badge">✨ 用餐黃金法則</div>
@@ -974,6 +864,116 @@ body {
     </div>
   </div>
 
+  <!-- =========================================================
+       TAB 2: 每日服用打卡專屬分頁 (大按鈕、極致好點)
+       ========================================================= -->
+  <div class="tab-content" id="tab-content-tracker">
+    <div class="tracker-container">
+      
+      <div class="tracker-header">
+        <div class="tracker-title">📅 今日打卡清單</div>
+        <div class="date-controls">
+          <button class="date-btn" onclick="changeDate(-1)">◀ 前一天</button>
+          <input type="date" id="tracker-date" class="date-picker-input" onchange="onDateChanged()">
+          <button class="date-btn" onclick="changeDate(1)">後一天 ▶</button>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-text" id="progress-text">今日達成率 0% (0/9)</div>
+      </div>
+
+      <div class="tracker-list" id="tracker-list">
+        
+        <div class="tracker-card-item" data-key="task_0" onclick="toggleTask('task_0', '01.早餐 優蛋白+三果汁')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 07:30 早餐時段</div>
+            <div class="tracker-item-title">🌅 早餐 優蛋白 2匙 ＋ 三果汁各 30cc 奶昔</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_1" onclick="toggleTask('task_1', '02.早餐後 威特倍 1包')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 08:45 早餐後</div>
+            <div class="tracker-item-title">💊 早餐後 威特倍（VITAPAK）1 包</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_2" onclick="toggleTask('task_2', '03.上午 葉綠飲大水壺')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 09:30 上午補水</div>
+            <div class="tracker-item-title">🍃 上午 葉綠飲隨身包 1包 ＋ 1000cc 大水壺</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_3" onclick="toggleTask('task_3', '04.午餐前 舒益纖+穩控')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 11:45 午餐前 30 分鐘</div>
+            <div class="tracker-item-title">🥗 午餐前 舒益纖 1包 ＋ 穩控 1包（飽足雙搭）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_4" onclick="toggleTask('task_4', '05.午餐 原型輕食7分飽')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 12:15 午餐時段</div>
+            <div class="tracker-item-title">🍽️ 午餐 原型輕食 7 分飽（蛋白質➔蔬菜➔澱粉）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_5" onclick="toggleTask('task_5', '06.午餐後 魚油+利維可+威特倍')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 13:00 午餐後</div>
+            <div class="tracker-item-title">✨ 午餐後 魚油 2顆 ＋ 利維可 3顆 ＋ 威特倍 1包</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_6" onclick="toggleTask('task_6', '07.下午茶 One Pack Juice')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 15:30 下午茶時段</div>
+            <div class="tracker-item-title">⚡ 下午茶 One Pack Juice（普精耐2+普益康2+紅能量1）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_7" onclick="toggleTask('task_7', '08.晚餐前 益生菌 1包')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 18:00 晚餐前</div>
+            <div class="tracker-item-title">🍬 晚餐前 植酵複合益生菌 1包（直接倒嘴巴吃）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_8" onclick="toggleTask('task_8', '09.睡前 果然鎂+舒眠蛋白')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 22:30 睡前舒緩</div>
+            <div class="tracker-item-title">🌙 睡前 果然鎂 2顆 ＋ 全植舒眠優蛋白 1包</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tracker-actions">
+        <div class="sync-status-badge" id="cloud-save-status">
+          🟢 雲端試算表已連線同步
+        </div>
+        <div class="action-buttons-group">
+          <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 同步雲端</button>
+          <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製打卡</button>
+          <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置打卡</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 <div class="toast" id="toast-msg">已儲存！</div>
@@ -1010,17 +1010,17 @@ function initTracker() {
 }
 
 function switchTab(tabName) {
-  document.getElementById('tab-btn-tracker').classList.remove('active');
   document.getElementById('tab-btn-recipe').classList.remove('active');
-  document.getElementById('tab-content-tracker').classList.remove('active');
+  document.getElementById('tab-btn-tracker').classList.remove('active');
   document.getElementById('tab-content-recipe').classList.remove('active');
+  document.getElementById('tab-content-tracker').classList.remove('active');
   
-  if (tabName === 'tracker') {
-    document.getElementById('tab-btn-tracker').classList.add('active');
-    document.getElementById('tab-content-tracker').classList.add('active');
-  } else {
+  if (tabName === 'recipe') {
     document.getElementById('tab-btn-recipe').classList.add('active');
     document.getElementById('tab-content-recipe').classList.add('active');
+  } else {
+    document.getElementById('tab-btn-tracker').classList.add('active');
+    document.getElementById('tab-content-tracker').classList.add('active');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
