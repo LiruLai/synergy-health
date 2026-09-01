@@ -963,7 +963,7 @@ body {
           🟢 雲端試算表已連線同步
         </div>
         <div class="action-buttons-group">
-          <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 同步雲端</button>
+          <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 立即同步雲端</button>
           <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製打卡</button>
           <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置打卡</button>
         </div>
@@ -981,7 +981,7 @@ const TOTAL_TASKS = 9;
 let currentDateStr = getTodayDateString();
 const DEFAULT_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxsAff2JnyFKrfTbDnf9mAMYrAg7C-nAFuBtZh8E_Go59OxhLVq38pNL4zldVJV8GQ_Qg/exec";
 let sheetsApiUrl = DEFAULT_SHEETS_API_URL;
-let lastUserActionTime = 0;
+let isSaving = false;
 
 function getTodayDateString() {
   const d = new Date();
@@ -996,16 +996,9 @@ function initTracker() {
   dateInput.value = currentDateStr;
   
   loadTasksForDate(currentDateStr);
-  fetchFromSheets(false);
   
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      fetchFromSheets(false);
-    }
-  });
-  window.addEventListener('focus', () => {
-    fetchFromSheets(false);
-  });
+  // Only fetch initial state once on load
+  fetchFromSheets(false);
 }
 
 function switchTab(tabName) {
@@ -1046,7 +1039,6 @@ function loadTasksForDate(dateStr) {
 }
 
 function toggleTask(key, taskName) {
-  lastUserActionTime = Date.now();
   const item = document.querySelector(`.tracker-card-item[data-key="${key}"]`);
   if (!item) return;
   
@@ -1073,7 +1065,7 @@ function saveTasks(changedKey, changedTaskName, isChecked) {
   }
   
   localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(checkedMap));
-  localStorage.setItem('synergy_last_modified_' + currentDateStr, Date.now().toString());
+  localStorage.setItem('synergy_user_updated_' + currentDateStr, Date.now().toString());
   updateProgress(checkedCount);
   showToast('💾 已儲存！');
   
@@ -1115,7 +1107,7 @@ function onDateChanged() {
 function resetTodayTasks() {
   if (confirm(`確定要清空 ${currentDateStr} 的打卡紀錄嗎？`)) {
     localStorage.removeItem('synergy_tracker_' + currentDateStr);
-    localStorage.setItem('synergy_last_modified_' + currentDateStr, Date.now().toString());
+    localStorage.removeItem('synergy_user_updated_' + currentDateStr);
     loadTasksForDate(currentDateStr);
     syncToGoogleSheets({}, 'all', '重置所有項目', false);
     showToast('🔄 已重置本日紀錄');
@@ -1141,6 +1133,7 @@ function exportTodayLog() {
 async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChecked) {
   const statusEl = document.getElementById('cloud-save-status');
   statusEl.textContent = '📊 正在同步至 Google 試算表...';
+  isSaving = true;
   
   try {
     const payload = {
@@ -1163,17 +1156,17 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
     statusEl.textContent = '🟢 雲端試算表已同步 (' + new Date().toLocaleTimeString() + ')';
   } catch (err) {
     statusEl.textContent = '⚠️ 試算表同步失敗（已保存在本機）';
+  } finally {
+    setTimeout(() => { isSaving = false; }, 1500);
   }
 }
 
 async function fetchFromSheets(showAlert=false) {
-  // If user just interacted within 10 seconds, do not let background GET overwrite local clicks
-  if (Date.now() - lastUserActionTime < 10000 && !showAlert) {
-    return;
-  }
+  // Never let fetch override while a save POST is in-flight
+  if (isSaving && !showAlert) return;
   
   const statusEl = document.getElementById('cloud-save-status');
-  statusEl.textContent = '📊 正在從 Google 試算表讀取...';
+  if (showAlert) statusEl.textContent = '📊 正在從 Google 試算表讀取...';
   
   try {
     const fetchUrl = `${sheetsApiUrl}?action=get&date=${currentDateStr}&_t=${Date.now()}`;
@@ -1181,18 +1174,21 @@ async function fetchFromSheets(showAlert=false) {
     if (res.ok) {
       const data = await res.json();
       if (data && data.tasks) {
-        const cloudTaskKeys = Object.keys(data.tasks);
+        const cloudTasks = data.tasks;
         const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
-        const localTasks = savedData ? JSON.parse(savedData) : {};
-        const localTaskKeys = Object.keys(localTasks);
+        const localTasks = savedData ? JSON.parse(savedData) : null;
         
-        // Anti-wipe protection: only overwrite if cloud actually returned valid tasks OR local is empty
-        if (cloudTaskKeys.length > 0 || localTaskKeys.length === 0 || showAlert) {
-          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(data.tasks));
+        // If user manually pressed sync, or local has no data, accept cloud
+        if (showAlert || !localTasks) {
+          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(cloudTasks));
           loadTasksForDate(currentDateStr);
           statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
           if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
         } else {
+          // Smart merge: if local has items, don't wipe them unless user explicitly asked
+          let merged = { ...cloudTasks, ...localTasks };
+          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(merged));
+          loadTasksForDate(currentDateStr);
           statusEl.textContent = '🟢 雲端試算表已連線同步';
         }
       }
