@@ -435,7 +435,7 @@ body {
 
 .tracker-card-item {
   background: #F8FAFC;
-  padding: 16px 20px;
+  padding: 15px 18px;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -505,7 +505,7 @@ body {
 }
 
 .tracker-item-title {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 800;
   color: #2D3748;
 }
@@ -863,7 +863,7 @@ body {
   </div>
 
   <!-- =========================================================
-       TAB 2: 每日服用打卡專屬分頁 (大按鈕、極致好點)
+       TAB 2: 每日服用打卡專屬分頁 (細拆 11 項，獨立好點選)
        ========================================================= -->
   <div class="tab-content" id="tab-content-tracker">
     <div class="tracker-container">
@@ -879,28 +879,40 @@ body {
 
       <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
-        <div class="progress-text" id="progress-text">今日達成率 0% (0/9)</div>
+        <div class="progress-text" id="progress-text">今日達成率 0% (0/11)</div>
       </div>
 
       <div class="tracker-list" id="tracker-list">
         
-        <div class="tracker-card-item" data-key="task_0" onclick="toggleTask('task_0', '01.早餐 優蛋白+三果汁')">
+        <!-- 01 早餐 優蛋白 -->
+        <div class="tracker-card-item" data-key="task_0" onclick="toggleTask('task_0', '01.早餐 優蛋白 2匙')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 07:30 早餐時段</div>
-            <div class="tracker-item-title">🌅 早餐 優蛋白 2匙 ＋ 三果汁各 30cc 奶昔</div>
+            <div class="tracker-item-title">🥤 早餐 優蛋白 2 湯匙（MAXIMUM PROTEIN）</div>
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_1" onclick="toggleTask('task_1', '02.早餐後 威特倍 1包')">
+        <!-- 02 早餐 三果汁+威特立 -->
+        <div class="tracker-card-item" data-key="task_1" onclick="toggleTask('task_1', '02.早餐 三果汁各30cc+威特立')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 07:30 早餐時段</div>
+            <div class="tracker-item-title">🍇 早餐 三果汁各 30cc ＋ 威特立 1 包（果香特調）</div>
+          </div>
+        </div>
+
+        <!-- 03 早餐後 威特倍 -->
+        <div class="tracker-card-item" data-key="task_2" onclick="toggleTask('task_2', '03.早餐後 威特倍 1包')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 08:45 早餐後</div>
-            <div class="tracker-item-title">💊 早餐後 威特倍（VITAPAK）1 包</div>
+            <div class="tracker-item-title">💊 早餐後 威特倍（VITAPAK 綜合維他命）1 包</div>
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_2" onclick="toggleTask('task_2', '03.上午 葉綠飲大水壺')">
+        <!-- 04 上午 葉綠飲大水壺 -->
+        <div class="tracker-card-item" data-key="task_3" onclick="toggleTask('task_3', '04.上午 葉綠飲大水壺')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 09:30 上午補水</div>
@@ -908,7 +920,8 @@ body {
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_3" onclick="toggleTask('task_3', '04.午餐前 舒益纖+穩控')">
+        <!-- 05 午餐前 舒益纖+穩控 -->
+        <div class="tracker-card-item" data-key="task_4" onclick="toggleTask('task_4', '05.午餐前 舒益纖+穩控')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 11:45 午餐前 30 分鐘</div>
@@ -916,7 +929,8 @@ body {
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_4" onclick="toggleTask('task_4', '05.午餐 原型輕食7分飽')">
+        <!-- 06 午餐 原型輕食 -->
+        <div class="tracker-card-item" data-key="task_5" onclick="toggleTask('task_5', '06.午餐 原型輕食7分飽')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 12:15 午餐時段</div>
@@ -924,7 +938,8 @@ body {
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_5" onclick="toggleTask('task_5', '06.午餐後 魚油+利維可+威特倍')">
+        <!-- 07 午餐後 守護三好友 -->
+        <div class="tracker-card-item" data-key="task_6" onclick="toggleTask('task_6', '07.午餐後 魚油+利維可+威特倍')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 13:00 午餐後</div>
@@ -932,7 +947,8 @@ body {
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_6" onclick="toggleTask('task_6', '07.下午茶 One Pack Juice')">
+        <!-- 08 下午茶 One Pack Juice -->
+        <div class="tracker-card-item" data-key="task_7" onclick="toggleTask('task_7', '08.下午茶 One Pack Juice')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 15:30 下午茶時段</div>
@@ -940,7 +956,8 @@ body {
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_7" onclick="toggleTask('task_7', '08.晚餐前 益生菌 1包')">
+        <!-- 09 晚餐前 益生菌 -->
+        <div class="tracker-card-item" data-key="task_8" onclick="toggleTask('task_8', '09.晚餐前 益生菌 1包')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 18:00 晚餐前</div>
@@ -948,11 +965,21 @@ body {
           </div>
         </div>
 
-        <div class="tracker-card-item" data-key="task_8" onclick="toggleTask('task_8', '09.睡前 果然鎂+舒眠蛋白')">
+        <!-- 10 睡前 果然鎂 -->
+        <div class="tracker-card-item" data-key="task_9" onclick="toggleTask('task_9', '10.睡前 果然鎂 2顆')">
           <div class="custom-checkbox"></div>
           <div class="tracker-item-info">
             <div class="tracker-item-time">⏰ 22:30 睡前舒緩</div>
-            <div class="tracker-item-title">🌙 睡前 果然鎂 2顆 ＋ 全植舒眠優蛋白 1包</div>
+            <div class="tracker-item-title">💤 睡前 果然鎂 2 顆（B-PRIME 科技放鬆鎂）</div>
+          </div>
+        </div>
+
+        <!-- 11 睡前 全植舒眠優蛋白 -->
+        <div class="tracker-card-item" data-key="task_10" onclick="toggleTask('task_10', '11.睡前 全植舒眠優蛋白 1包')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 22:30 睡前舒緩</div>
+            <div class="tracker-item-title">🍵 睡前 全植舒眠優蛋白 1 包（GA NIGHT 奶茶風味）</div>
           </div>
         </div>
 
@@ -977,7 +1004,7 @@ body {
 <div class="toast" id="toast-msg">已儲存！</div>
 
 <script>
-const TOTAL_TASKS = 9;
+const TOTAL_TASKS = 11;
 let currentDateStr = getTodayDateString();
 const DEFAULT_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxsAff2JnyFKrfTbDnf9mAMYrAg7C-nAFuBtZh8E_Go59OxhLVq38pNL4zldVJV8GQ_Qg/exec";
 let sheetsApiUrl = DEFAULT_SHEETS_API_URL;
@@ -996,8 +1023,6 @@ function initTracker() {
   dateInput.value = currentDateStr;
   
   loadTasksForDate(currentDateStr);
-  
-  // Only fetch initial state once on load
   fetchFromSheets(false);
 }
 
@@ -1162,7 +1187,6 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
 }
 
 async function fetchFromSheets(showAlert=false) {
-  // Never let fetch override while a save POST is in-flight
   if (isSaving && !showAlert) return;
   
   const statusEl = document.getElementById('cloud-save-status');
@@ -1178,14 +1202,12 @@ async function fetchFromSheets(showAlert=false) {
         const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
         const localTasks = savedData ? JSON.parse(savedData) : null;
         
-        // If user manually pressed sync, or local has no data, accept cloud
         if (showAlert || !localTasks) {
           localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(cloudTasks));
           loadTasksForDate(currentDateStr);
           statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
           if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
         } else {
-          // Smart merge: if local has items, don't wipe them unless user explicitly asked
           let merged = { ...cloudTasks, ...localTasks };
           localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(merged));
           loadTasksForDate(currentDateStr);
