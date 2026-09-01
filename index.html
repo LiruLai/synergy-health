@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌸 Synergy 可愛健康時鐘食譜・Google 試算表雲端同步版 🌸</title>
+<title>🌸 Synergy 可愛健康時鐘食譜・一日能量調配指南 🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -81,94 +81,6 @@ body {
   padding: 6px 20px;
   border-radius: 20px;
   backdrop-filter: blur(4px);
-}
-
-/* Google Sheets Sync Card */
-.sheets-sync-card {
-  background: white;
-  border: 2px solid #A7F3D0;
-  border-radius: 20px;
-  padding: 18px 22px;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.08);
-}
-
-.sync-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.sync-status {
-  font-size: 15px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #065F46;
-}
-
-.sync-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
-}
-
-.sync-inputs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  flex: 1;
-  justify-content: flex-end;
-}
-
-.sync-input {
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  padding: 8px 14px;
-  border-radius: 12px;
-  border: 2px solid #CBD5E1;
-  background: #F8FAFC;
-  outline: none;
-  width: 100%;
-  max-width: 380px;
-}
-
-.sync-input:focus {
-  border-color: #10B981;
-  background: white;
-}
-
-.sync-btn {
-  background: #10B981;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-
-.sync-btn:hover {
-  background: #059669;
-}
-
-.sync-tip {
-  font-size: 12px;
-  color: #4B5563;
-  font-weight: 600;
-  margin-top: 6px;
 }
 
 /* Overall Rules Card */
@@ -560,9 +472,6 @@ body {
     max-width: 240px;
     margin: 0 auto;
   }
-  .sync-inputs {
-    justify-content: flex-start;
-  }
 }
 </style>
 </head>
@@ -573,24 +482,7 @@ body {
   <!-- Header Card -->
   <div class="header-card">
     <div class="header-title">🌸 Synergy 健康管理計畫・可愛時鐘食譜 🌸</div>
-    <div class="header-subtitle">嚴選高酵營養素・按時補給・Google 試算表雲端同步</div>
-  </div>
-
-  <!-- Google Sheets Sync Banner -->
-  <div class="sheets-sync-card">
-    <div class="sync-header">
-      <div class="sync-status">
-        <span class="sync-dot" id="sync-indicator"></span>
-        <span id="sync-status-text">📊 Google 試算表連線中</span>
-      </div>
-      <div class="sync-inputs">
-        <input type="url" id="sheets-url-input" class="sync-input" placeholder="貼上您的 Google Apps Script Web App 網址">
-        <button class="sync-btn" onclick="saveSheetsUrl()">連接試算表 🔗</button>
-      </div>
-    </div>
-    <div class="sync-tip" id="sheets-tip-text">
-      💡 只要在上方貼上您的 <strong>Google 試算表 Web App 網址</strong>，手機與電腦打卡就會自動即時寫入您的 Google 表格中！
-    </div>
+    <div class="header-subtitle">嚴選高酵營養素・按時補給・好習慣養成指南</div>
   </div>
 
   <!-- Diet Principle -->
@@ -861,7 +753,7 @@ body {
     </div>
 
     <div class="tracker-actions">
-      <span style="font-size:12px; color:#065F46; font-weight:800;" id="cloud-save-status">📊 支援 Google 試算表即時連線</span>
+      <span style="font-size:12px; color:#065F46; font-weight:800;" id="cloud-save-status">🟢 雲端試算表已連線同步</span>
       <div style="display:flex; gap:8px;">
         <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製今日打卡文字</button>
         <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置本日勾選</button>
@@ -877,7 +769,8 @@ body {
 <script>
 const TOTAL_TASKS = 9;
 let currentDateStr = getTodayDateString();
-let sheetsApiUrl = localStorage.getItem('synergy_sheets_api_url') || '';
+const DEFAULT_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxsAff2JnyFKrfTbDnf9mAMYrAg7C-nAFuBtZh8E_Go59OxhLVq38pNL4zldVJV8GQ_Qg/exec";
+let sheetsApiUrl = DEFAULT_SHEETS_API_URL;
 
 function getTodayDateString() {
   const d = new Date();
@@ -891,20 +784,8 @@ function initTracker() {
   const dateInput = document.getElementById('tracker-date');
   dateInput.value = currentDateStr;
   
-  const urlInput = document.getElementById('sheets-url-input');
-  if (sheetsApiUrl) {
-    urlInput.value = sheetsApiUrl;
-    document.getElementById('sync-status-text').textContent = '🟢 Google 試算表已連線';
-    document.getElementById('sync-indicator').style.background = '#10B981';
-  } else {
-    document.getElementById('sync-status-text').textContent = '⚠️ 請設定 Google 試算表網址';
-    document.getElementById('sync-indicator').style.background = '#F59E0B';
-  }
-  
   loadTasksForDate(currentDateStr);
-  if (sheetsApiUrl) {
-    fetchFromSheets();
-  }
+  fetchFromSheets();
 }
 
 function loadTasksForDate(dateStr) {
@@ -965,9 +846,7 @@ function saveTasks(changedKey, changedTaskName, isChecked) {
   showToast('💾 已儲存！');
   
   // 2. Sync to Google Sheets
-  if (sheetsApiUrl) {
-    syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChecked);
-  }
+  syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChecked);
 }
 
 function updateProgress(count) {
@@ -990,9 +869,7 @@ function changeDate(offsetDays) {
   
   document.getElementById('tracker-date').value = currentDateStr;
   loadTasksForDate(currentDateStr);
-  if (sheetsApiUrl) {
-    fetchFromSheets();
-  }
+  fetchFromSheets();
 }
 
 function onDateChanged() {
@@ -1000,9 +877,7 @@ function onDateChanged() {
   if (dateInput.value) {
     currentDateStr = dateInput.value;
     loadTasksForDate(currentDateStr);
-    if (sheetsApiUrl) {
-      fetchFromSheets();
-    }
+    fetchFromSheets();
   }
 }
 
@@ -1010,9 +885,7 @@ function resetTodayTasks() {
   if (confirm(`確定要清空 ${currentDateStr} 的打卡紀錄嗎？`)) {
     localStorage.removeItem('synergy_tracker_' + currentDateStr);
     loadTasksForDate(currentDateStr);
-    if (sheetsApiUrl) {
-      syncToGoogleSheets({}, 'all', '重置所有項目', false);
-    }
+    syncToGoogleSheets({}, 'all', '重置所有項目', false);
     showToast('🔄 已重置本日紀錄');
   }
 }
@@ -1031,21 +904,6 @@ function exportTodayLog() {
   }).catch(() => {
     alert(logText);
   });
-}
-
-function saveSheetsUrl() {
-  const input = document.getElementById('sheets-url-input');
-  const url = input.value.trim();
-  if (!url) {
-    alert('請輸入有效的 Google Apps Script 網址！');
-    return;
-  }
-  sheetsApiUrl = url;
-  localStorage.setItem('synergy_sheets_api_url', sheetsApiUrl);
-  document.getElementById('sync-status-text').textContent = '🟢 Google 試算表已連線';
-  document.getElementById('sync-indicator').style.background = '#10B981';
-  showToast('🔗 已連線！正在抓取雲端紀錄...');
-  fetchFromSheets(true);
 }
 
 // Google Sheets Sync Engine (Cross-Origin Fetch)
@@ -1072,14 +930,13 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
       body: JSON.stringify(payload)
     });
     
-    statusEl.textContent = '🟢 Google 試算表同步完成 (' + new Date().toLocaleTimeString() + ')';
+    statusEl.textContent = '🟢 雲端試算表已同步 (' + new Date().toLocaleTimeString() + ')';
   } catch (err) {
     statusEl.textContent = '⚠️ 試算表同步失敗（已保存在本機）';
   }
 }
 
 async function fetchFromSheets(showAlert=false) {
-  if (!sheetsApiUrl) return;
   const statusEl = document.getElementById('cloud-save-status');
   statusEl.textContent = '📊 正在從 Google 試算表讀取...';
   
@@ -1096,12 +953,8 @@ async function fetchFromSheets(showAlert=false) {
       }
     }
   } catch (e) {
-    statusEl.textContent = '🟢 本地快取已就緒';
+    statusEl.textContent = '🟢 雲端試算表已連線同步';
   }
-}
-
-function scrollToTracker() {
-  document.getElementById('tracker-section').scrollIntoView({ behavior: 'smooth' });
 }
 
 function showToast(msg) {
