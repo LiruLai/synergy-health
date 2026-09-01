@@ -432,6 +432,16 @@ body {
   border-radius: 12px;
   border: none;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-sync {
+  background: #10B981;
+  color: white;
+}
+
+.btn-sync:hover {
+  background: #059669;
 }
 
 .btn-export {
@@ -755,8 +765,9 @@ body {
     <div class="tracker-actions">
       <span style="font-size:12px; color:#065F46; font-weight:800;" id="cloud-save-status">🟢 雲端試算表已連線同步</span>
       <div style="display:flex; gap:8px;">
-        <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製今日打卡文字</button>
-        <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置本日勾選</button>
+        <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 同步雲端</button>
+        <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製打卡</button>
+        <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置勾選</button>
       </div>
     </div>
 
@@ -786,6 +797,16 @@ function initTracker() {
   
   loadTasksForDate(currentDateStr);
   fetchFromSheets();
+  
+  // Auto-sync when tab becomes active / focused
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      fetchFromSheets();
+    }
+  });
+  window.addEventListener('focus', () => {
+    fetchFromSheets();
+  });
 }
 
 function loadTasksForDate(dateStr) {
@@ -840,12 +861,10 @@ function saveTasks(changedKey, changedTaskName, isChecked) {
     }
   }
   
-  // 1. Save to local device
   localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(checkedMap));
   updateProgress(checkedCount);
   showToast('💾 已儲存！');
   
-  // 2. Sync to Google Sheets
   syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChecked);
 }
 
@@ -906,10 +925,9 @@ function exportTodayLog() {
   });
 }
 
-// Google Sheets Sync Engine (Cross-Origin Fetch)
 async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChecked) {
   const statusEl = document.getElementById('cloud-save-status');
-  statusEl.textContent = '📊 正在同步寫入 Google 試算表...';
+  statusEl.textContent = '📊 正在同步至 Google 試算表...';
   
   try {
     const payload = {
@@ -922,11 +940,11 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
       updatedAt: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
     };
     
-    // Send POST to Google Apps Script
+    // Using text/plain prevents CORS preflight
     await fetch(sheetsApiUrl, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     });
     
@@ -949,7 +967,7 @@ async function fetchFromSheets(showAlert=false) {
         localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(data.tasks));
         loadTasksForDate(currentDateStr);
         statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
-        if (showAlert) alert('🎉 成功連接 Google 試算表！已同步最新紀錄！');
+        if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
       }
     }
   } catch (e) {
