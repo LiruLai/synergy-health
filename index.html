@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🌸 Synergy 可愛健康時鐘食譜・一日能量調配指南 🌸</title>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary-pink: #FF7B9C;
@@ -30,7 +30,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-dark);
   line-height: 1.6;
-  padding: 24px 16px 60px;
+  padding: 16px 12px 60px;
   background-image: 
     radial-gradient(#FFD2DC 1.5px, transparent 1.5px),
     radial-gradient(#D2E2FF 1.5px, var(--bg-color) 1.5px);
@@ -46,54 +46,103 @@ body {
 /* Header Banner */
 .header-card {
   background: linear-gradient(135deg, #FF7B9C 0%, #FF9F43 50%, #54A0FF 100%);
-  border-radius: 28px;
-  padding: 36px 24px;
+  border-radius: 24px;
+  padding: 24px 18px;
   color: white;
   text-align: center;
-  box-shadow: 0 16px 32px rgba(255, 123, 156, 0.25);
-  margin-bottom: 24px;
+  box-shadow: 0 12px 28px rgba(255, 123, 156, 0.22);
+  margin-bottom: 18px;
   position: relative;
   overflow: hidden;
 }
 
-.header-card::after {
-  content: "✨";
-  position: absolute;
-  top: 16px;
-  right: 24px;
-  font-size: 36px;
-  opacity: 0.8;
-}
-
 .header-title {
-  font-size: 26px;
+  font-size: 23px;
   font-weight: 900;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
 
 .header-subtitle {
-  font-size: 15px;
+  font-size: 13px;
   opacity: 0.95;
   background: rgba(255, 255, 255, 0.2);
   display: inline-block;
-  padding: 6px 20px;
-  border-radius: 20px;
+  padding: 4px 14px;
+  border-radius: 16px;
   backdrop-filter: blur(4px);
 }
 
-/* Overall Rules Card */
+/* Top Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  background: white;
+  border-radius: 20px;
+  padding: 6px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border: 2px solid #FFF0F5;
+  gap: 8px;
+}
+
+.nav-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nav-tab:hover {
+  color: var(--primary-pink);
+  background: #FFF8FA;
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, #FF7B9C, #FF9F43);
+  color: white;
+  box-shadow: 0 6px 16px rgba(255, 123, 156, 0.35);
+  transform: scale(1.01);
+}
+
+/* Tab Content Areas */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   TAB 1: 食譜時鐘指南 STYLES
+   ========================================================= */
 .diet-principles {
   background: white;
   border-radius: 20px;
-  padding: 20px 24px;
-  margin-bottom: 32px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.04);
   border: 2px dashed #FFD2DC;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -113,7 +162,6 @@ body {
   min-width: 260px;
 }
 
-/* Timeline Container */
 .timeline {
   position: relative;
   padding-left: 20px;
@@ -130,10 +178,9 @@ body {
   border-radius: 4px;
 }
 
-/* Timeline Item */
 .timeline-item {
   position: relative;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
   padding-left: 42px;
 }
 
@@ -157,11 +204,11 @@ body {
 .recipe-card {
   background: white;
   border-radius: 24px;
-  padding: 24px;
+  padding: 22px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   display: grid;
-  grid-template-columns: 1fr 210px;
-  gap: 20px;
+  grid-template-columns: 1fr 200px;
+  gap: 18px;
   align-items: center;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -174,8 +221,8 @@ body {
 .card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
@@ -189,7 +236,7 @@ body {
 }
 
 .meal-name {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
   color: var(--text-dark);
 }
@@ -197,16 +244,16 @@ body {
 .ingredient-list {
   background: #F8FAFC;
   border-radius: 16px;
-  padding: 14px 18px;
-  margin-bottom: 12px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
   border-left: 4px solid var(--primary-pink);
 }
 
 .ingredient-item {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #2D3748;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .ingredient-item:last-child {
@@ -219,10 +266,10 @@ body {
 }
 
 .cute-tip {
-  font-size: 13px;
+  font-size: 12.5px;
   color: #718096;
   background: #FFF8E7;
-  padding: 10px 14px;
+  padding: 9px 12px;
   border-radius: 12px;
   border: 1px solid #FFEAA7;
 }
@@ -281,13 +328,14 @@ body {
 .item-night .time-tag { background: linear-gradient(135deg, #485460, #576574); }
 .item-night .ingredient-list { border-left-color: #485460; }
 
-/* Interactive Tracker Box */
-.tracker-box {
+/* =========================================================
+   TAB 2: 每日打卡專屬分頁 STYLES (大按鈕、極致好點)
+   ========================================================= */
+.tracker-container {
   background: white;
-  border-radius: 24px;
-  padding: 28px 24px;
-  margin-top: 36px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  border-radius: 28px;
+  padding: 24px 20px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.07);
   border: 2px solid #FFF0F5;
 }
 
@@ -295,13 +343,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
   gap: 12px;
 }
 
 .tracker-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 900;
   color: var(--text-dark);
   display: flex;
@@ -312,47 +360,58 @@ body {
 .date-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  background: #F8FAFC;
+  padding: 4px;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
 }
 
 .date-picker-input {
   font-family: inherit;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 12px;
-  border: 2px solid #E2E8F0;
-  background: #F8FAFC;
+  border: none;
+  background: transparent;
   color: #2D3748;
   outline: none;
   cursor: pointer;
 }
 
 .date-btn {
-  background: #EDF2F7;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 10px;
-  font-weight: 800;
+  background: white;
+  border: 1px solid #CBD5E1;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 900;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
+  color: #4A5568;
+  transition: all 0.2s;
+}
+
+.date-btn:hover {
+  background: #EDF2F7;
 }
 
 .progress-container {
   background: #F1F5F9;
-  border-radius: 14px;
-  height: 20px;
+  border-radius: 16px;
+  height: 26px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
 }
 
 .progress-bar {
   height: 100%;
   background: linear-gradient(90deg, #FF7B9C, #FF9F43, #2ED573);
   width: 0%;
-  border-radius: 14px;
+  border-radius: 16px;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -361,78 +420,142 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 900;
-  color: #4A5568;
+  color: #2D3748;
+  letter-spacing: 0.5px;
 }
 
-.tracker-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* Big Touch-Friendly Tracker List */
+.tracker-list {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.tracker-item {
+.tracker-card-item {
   background: #F8FAFC;
-  padding: 14px 16px;
-  border-radius: 16px;
+  padding: 16px 20px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 2.5px solid transparent;
   transition: all 0.2s ease;
   user-select: none;
 }
 
-.tracker-item:hover {
+.tracker-card-item:hover {
   background: #FFF0F5;
   border-color: #FFD2DC;
+  transform: translateY(-2px);
 }
 
-.tracker-item.checked {
+.tracker-card-item.checked {
   background: #F0FDF4;
-  border-color: #BBF7D0;
+  border-color: #86EFAC;
 }
 
-.tracker-item.checked span {
+.tracker-card-item.checked .tracker-item-title {
   color: #166534;
+  text-decoration: line-through;
+  opacity: 0.85;
+}
+
+.custom-checkbox {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 2.5px solid #CBD5E1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.tracker-card-item.checked .custom-checkbox {
+  background: #2ED573;
+  border-color: #2ED573;
+  color: white;
+}
+
+.custom-checkbox::after {
+  content: "✔";
+  font-size: 15px;
   font-weight: 900;
+  display: none;
 }
 
-.tracker-item input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--primary-pink);
-  cursor: pointer;
+.tracker-card-item.checked .custom-checkbox::after {
+  display: block;
 }
 
-.tracker-item span {
-  font-size: 13px;
+.tracker-item-info {
+  flex: 1;
+}
+
+.tracker-item-time {
+  font-size: 12px;
   font-weight: 800;
-  color: #4A5568;
+  color: #94A3B8;
+  margin-bottom: 2px;
 }
 
+.tracker-item-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #2D3748;
+}
+
+.tracker-card-item.checked .tracker-item-time {
+  color: #4ADE80;
+}
+
+/* Tracker Actions Footer */
 .tracker-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
-  padding-top: 14px;
-  border-top: 1px dashed #E2E8F0;
+  padding-top: 18px;
+  border-top: 2px dashed #E2E8F0;
+}
+
+.sync-status-badge {
+  font-size: 13px;
+  font-weight: 800;
+  color: #065F46;
+  background: #ECFDF5;
+  padding: 6px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-buttons-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .action-btn {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
-  padding: 8px 16px;
-  border-radius: 12px;
+  padding: 10px 18px;
+  border-radius: 14px;
   border: none;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-sync {
@@ -449,9 +572,18 @@ body {
   color: white;
 }
 
+.btn-export:hover {
+  background: #2E86DE;
+}
+
 .btn-clear {
   background: #F1F5F9;
   color: #64748B;
+}
+
+.btn-clear:hover {
+  background: #E2E8F0;
+  color: #334155;
 }
 
 .toast {
@@ -482,6 +614,16 @@ body {
     max-width: 240px;
     margin: 0 auto;
   }
+  .action-buttons-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .action-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 10px;
+    font-size: 13px;
+  }
 }
 </style>
 </head>
@@ -491,286 +633,345 @@ body {
 
   <!-- Header Card -->
   <div class="header-card">
-    <div class="header-title">🌸 Synergy 健康管理計畫・可愛時鐘食譜 🌸</div>
-    <div class="header-subtitle">嚴選高酵營養素・按時補給・好習慣養成指南</div>
+    <div class="header-title">🌸 Synergy 健康管理計畫 🌸</div>
+    <div class="header-subtitle">嚴選高酵營養素・按時補給・Google 試算表雲端同步</div>
   </div>
 
-  <!-- Diet Principle -->
-  <div class="diet-principles">
-    <div class="principle-badge">✨ 用餐黃金法則</div>
-    <div class="principle-desc">
-      每餐維持 <strong>7 分飽</strong> 輕食（原型食物為主），進食順序請嚴格遵循：
-      <strong>① 蛋白質 ➔ ② 蔬菜纖維 ➔ ③ 優質澱粉</strong>。
+  <!-- Top Navigation Tabs -->
+  <div class="nav-tabs">
+    <div class="nav-tab active" id="tab-btn-tracker" onclick="switchTab('tracker')">
+      📋 每日服用打卡
+    </div>
+    <div class="nav-tab" id="tab-btn-recipe" onclick="switchTab('recipe')">
+      📖 食譜調配指南
     </div>
   </div>
 
-  <div class="timeline">
-
-    <!-- 01. 早餐 -->
-    <div class="timeline-item item-morning">
-      <div class="time-dot">🌅</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 07:30 - 08:30 早餐時段</span>
-            <div class="meal-name">晨光活力・優蛋白三果汁奶昔</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">🥤 <span class="ingredient-qty">優蛋白 2 湯匙</span>（MAXIMUM PROTEIN）</div>
-            <div class="ingredient-item">⚡ <span class="ingredient-qty">威特立 1 包</span>（VITALIFT 能量飲）</div>
-            <div class="ingredient-item">🍇 <span class="ingredient-qty">巴西莓 30cc</span> ＋ 🍍 <span class="ingredient-qty">蘿苓果 30cc</span> ＋ 🍎 <span class="ingredient-qty">紅妍金透飲 30cc</span></div>
-            <div class="ingredient-item">💧 加入 <span class="ingredient-qty">400 ~ 500 cc 溫水或常溫水</span> 搖均勻飲用</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>使用搖搖杯搖勻，果香濃郁順口，一次補足優質蛋白與三大超級水果多酚！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/combos/combo_01_breakfast_juice.jpg" alt="早餐三果汁黃金組合手牽手">
-          <span class="badge-tag">三果汁手牽手</span>
+  <!-- =========================================================
+       TAB 1 (預設首頁): 每日服用打卡專屬分頁 (超好點選！)
+       ========================================================= -->
+  <div class="tab-content active" id="tab-content-tracker">
+    <div class="tracker-container">
+      
+      <div class="tracker-header">
+        <div class="tracker-title">📅 今日打卡清單</div>
+        <div class="date-controls">
+          <button class="date-btn" onclick="changeDate(-1)">◀ 前一天</button>
+          <input type="date" id="tracker-date" class="date-picker-input" onchange="onDateChanged()">
+          <button class="date-btn" onclick="changeDate(1)">後一天 ▶</button>
         </div>
       </div>
-    </div>
 
-    <!-- 02. 早餐後 -->
-    <div class="timeline-item item-morning">
-      <div class="time-dot">💊</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 08:45 早餐後</span>
-            <div class="meal-name">綜合維他命・全日基礎打底</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">✨ <span class="ingredient-qty">威特倍 1 包</span>（VITAPAK 綜合維生素礦物質包）</div>
-            <div class="ingredient-item">💧 搭配溫開水直接吞服（內含 6 顆膠囊）</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>一小包內含 6 顆多元微量元素膠囊，維持一整天的精神充沛與代謝運作！
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-text" id="progress-text">今日達成率 0% (0/9)</div>
+      </div>
+
+      <div class="tracker-list" id="tracker-list">
+        
+        <div class="tracker-card-item" data-key="task_0" onclick="toggleTask('task_0', '01.早餐 優蛋白+三果汁')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 07:30 早餐時段</div>
+            <div class="tracker-item-title">🌅 早餐 優蛋白 2匙 ＋ 三果汁各 30cc 奶昔</div>
           </div>
         </div>
-        <div class="card-img-box">
-          <img src="images/stickers/sticker_16_vitapak.jpg" alt="威特倍">
-          <span class="badge-tag">全方位基礎包</span>
+
+        <div class="tracker-card-item" data-key="task_1" onclick="toggleTask('task_1', '02.早餐後 威特倍 1包')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 08:45 早餐後</div>
+            <div class="tracker-item-title">💊 早餐後 威特倍（VITAPAK）1 包</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_2" onclick="toggleTask('task_2', '03.上午 葉綠飲大水壺')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 09:30 上午補水</div>
+            <div class="tracker-item-title">🍃 上午 葉綠飲隨身包 1包 ＋ 1000cc 大水壺</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_3" onclick="toggleTask('task_3', '04.午餐前 舒益纖+穩控')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 11:45 午餐前 30 分鐘</div>
+            <div class="tracker-item-title">🥗 午餐前 舒益纖 1包 ＋ 穩控 1包（飽足雙搭）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_4" onclick="toggleTask('task_4', '05.午餐 原型輕食7分飽')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 12:15 午餐時段</div>
+            <div class="tracker-item-title">🍽️ 午餐 原型輕食 7 分飽（蛋白質➔蔬菜➔澱粉）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_5" onclick="toggleTask('task_5', '06.午餐後 魚油+利維可+威特倍')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 13:00 午餐後</div>
+            <div class="tracker-item-title">✨ 午餐後 魚油 2顆 ＋ 利維可 3顆 ＋ 威特倍 1包</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_6" onclick="toggleTask('task_6', '07.下午茶 One Pack Juice')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 15:30 下午茶時段</div>
+            <div class="tracker-item-title">⚡ 下午茶 One Pack Juice（普精耐2+普益康2+紅能量1）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_7" onclick="toggleTask('task_7', '08.晚餐前 益生菌 1包')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 18:00 晚餐前</div>
+            <div class="tracker-item-title">🍬 晚餐前 植酵複合益生菌 1包（直接倒嘴巴吃）</div>
+          </div>
+        </div>
+
+        <div class="tracker-card-item" data-key="task_8" onclick="toggleTask('task_8', '09.睡前 果然鎂+舒眠蛋白')">
+          <div class="custom-checkbox"></div>
+          <div class="tracker-item-info">
+            <div class="tracker-item-time">⏰ 22:30 睡前舒緩</div>
+            <div class="tracker-item-title">🌙 睡前 果然鎂 2顆 ＋ 全植舒眠優蛋白 1包</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tracker-actions">
+        <div class="sync-status-badge" id="cloud-save-status">
+          🟢 雲端試算表已連線同步
+        </div>
+        <div class="action-buttons-group">
+          <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 同步雲端</button>
+          <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製打卡</button>
+          <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置打卡</button>
         </div>
       </div>
-    </div>
 
-    <!-- 03. 上午綠色精華 -->
-    <div class="timeline-item item-green">
-      <div class="time-dot">🍃</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 09:30 - 11:30 上午補水</span>
-            <div class="meal-name">葉綠清爽飲・體內環保大水壺</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">🌿 <span class="ingredient-qty">葉綠飲隨身包 1 包</span>（TRUGREEN+ 薄荷或萊姆風味）</div>
-            <div class="ingredient-item">🚰 沖泡於 <span class="ingredient-qty">1000 cc 大水壺</span> 當作全日水分飲用</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>1000cc 喝完後可以再回沖多一壺，或持續以純水補充水分，保持水漾循環！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/stickers/sticker_06_trugreen_mint.jpg" alt="葉綠飲">
-          <span class="badge-tag">清新大水壺</span>
-        </div>
-      </div>
     </div>
-
-    <!-- 04. 午餐前 30 分鐘 -->
-    <div class="timeline-item item-noon">
-      <div class="time-dot">🥗</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 11:45 - 12:00 午餐前 30 分鐘</span>
-            <div class="meal-name">飽足順暢雙搭・餐前管理</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">🫐 <span class="ingredient-qty">舒益纖 1 包</span>（FIBER DTX 柑橘纖維）</div>
-            <div class="ingredient-item">🍓 <span class="ingredient-qty">穩控 1 包</span>（CRAVE CONTROL 草莓檸檬）</div>
-            <div class="ingredient-item">💧 倒入 <span class="ingredient-qty">300 ~ 400 cc 水</span> 攪拌均勻並立即飲用</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>高纖飽足雙拍檔手牽手！餐前 30 分鐘喝下，能有效增加飽足感，讓午餐自然吃得輕盈！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/combos/combo_02_pre_lunch.jpg" alt="餐前雙搭手牽手">
-          <span class="badge-tag">餐前雙搭手牽手</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 05. 午餐後 -->
-    <div class="timeline-item item-noon">
-      <div class="time-dot">✨</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 13:00 - 13:30 午餐後</span>
-            <div class="meal-name">晶亮代謝守護・午後元氣充電</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">🐟 <span class="ingredient-qty">優美佳魚油 2 顆</span>（AC OMEGA-3 高純度魚油）</div>
-            <div class="ingredient-item">🌿 <span class="ingredient-qty">利維可 3 顆</span>（LIV-CARE 舒緩草本）</div>
-            <div class="ingredient-item">📦 <span class="ingredient-qty">威特倍 1 包</span>（VITAPAK 綜合隨身包）</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>飯後脂溶性營養素吸收最佳，幫助思緒靈活清晰、維持午後高效率！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/combos/combo_04_post_lunch.jpg" alt="午餐後守護三好友手牽手">
-          <span class="badge-tag">守護三好友手牽手</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 06. 下午補充 One Pack Juice -->
-    <div class="timeline-item item-afternoon">
-      <div class="time-dot">⚡</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 15:30 - 16:30 下午茶時段</span>
-            <div class="meal-name">One Pack Juice 活力三劍客特調</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">🍊 <span class="ingredient-qty">普精耐 2 包</span>（PROARGI-9+ 柑橘莓果）</div>
-            <div class="ingredient-item">🍇 <span class="ingredient-qty">普益康 2 包</span>（PROGUARD 洋紅防護）</div>
-            <div class="ingredient-item">🍷 <span class="ingredient-qty">紅色能量 1 包</span>（SYNERBEET 甜菜根深紅）</div>
-            <div class="ingredient-item">💧 注入 <span class="ingredient-qty">1000 cc 常溫水</span>，搖勻後於 <span class="ingredient-qty">1 小時內喝完</span></div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>一氧化氮前驅物與甜菜紅素滿載！一小時內飲用完畢，迅速提振午後循環與活力！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/combos/combo_03_afternoon_power.jpg" alt="One Pack Juice三劍客手牽手">
-          <span class="badge-tag">活力三劍客手牽手</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 07. 晚餐前 -->
-    <div class="timeline-item item-night">
-      <div class="time-dot">🍬</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 18:00 - 18:30 晚餐前</span>
-            <div class="meal-name">熱帶水果益生菌・好菌進駐</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">🍍 <span class="ingredient-qty">植酵複合益生菌 1 包</span>（PROBIOTIC 1000+）</div>
-            <div class="ingredient-item">👄 <strong>可以直接倒嘴巴吃</strong>，酸甜水果風味</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>直接倒入口中好吸收，或搭配常溫開水，維持消化道健康環境！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/stickers/sticker_18_probiotic.jpg" alt="益生菌">
-          <span class="badge-tag">好菌小精靈</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 08. 睡前 -->
-    <div class="timeline-item item-night">
-      <div class="time-dot">🌙</div>
-      <div class="recipe-card">
-        <div class="card-info">
-          <div class="card-header">
-            <span class="time-tag">⏰ 22:30 睡前舒緩</span>
-            <div class="meal-name">晚安舒眠好夢・深層放鬆搭檔</div>
-          </div>
-          <div class="ingredient-list">
-            <div class="ingredient-item">💤 <span class="ingredient-qty">果然鎂 2 顆</span>（B-PRIME 科技放鬆鎂）</div>
-            <div class="ingredient-item">🍵 <span class="ingredient-qty">全植舒眠優蛋白 1 包</span>（GA NIGHT VEGAN 奶茶風味，若晚餐未飲用）</div>
-            <div class="ingredient-item">💧 搭配溫水服用</div>
-          </div>
-          <div class="cute-tip">
-            💡 <strong>小秘訣：</strong>鎂離子與舒眠配方能舒緩緊繃身心，提升夜間睡眠品質，做個香甜美夢！
-          </div>
-        </div>
-        <div class="card-img-box">
-          <img src="images/combos/combo_05_bedtime_sleep.jpg" alt="睡前舒眠好夢搭檔手牽手">
-          <span class="badge-tag">好夢搭檔手牽手</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- Interactive Daily Tracker -->
-  <div class="tracker-box" id="tracker-section">
-    <div class="tracker-header">
-      <div class="tracker-title">📋 今日飲用打卡記錄</div>
-      <div class="date-controls">
-        <button class="date-btn" onclick="changeDate(-1)">◀ 前一天</button>
-        <input type="date" id="tracker-date" class="date-picker-input" onchange="onDateChanged()">
-        <button class="date-btn" onclick="changeDate(1)">後一天 ▶</button>
+  <!-- =========================================================
+       TAB 2: 可愛食譜調配指南與手牽手圖鑑
+       ========================================================= -->
+  <div class="tab-content" id="tab-content-recipe">
+    
+    <div class="diet-principles">
+      <div class="principle-badge">✨ 用餐黃金法則</div>
+      <div class="principle-desc">
+        每餐維持 <strong>7 分飽</strong> 輕食（原型食物為主），進食順序請嚴格遵循：
+        <strong>① 蛋白質 ➔ ② 蔬菜纖維 ➔ ③ 優質澱粉</strong>。
       </div>
     </div>
 
-    <div class="progress-container">
-      <div class="progress-bar" id="progress-bar"></div>
-      <div class="progress-text" id="progress-text">今日達成率 0% (0/9)</div>
-    </div>
+    <div class="timeline">
 
-    <div class="tracker-grid" id="tracker-grid">
-      <label class="tracker-item" data-key="task_0">
-        <input type="checkbox" onchange="toggleTask('task_0', '01.早餐 優蛋白+三果汁')">
-        <span>🌅 早餐 優蛋白+三果汁</span>
-      </label>
-      <label class="tracker-item" data-key="task_1">
-        <input type="checkbox" onchange="toggleTask('task_1', '02.早餐後 威特倍 1包')">
-        <span>💊 早餐後 威特倍 1包</span>
-      </label>
-      <label class="tracker-item" data-key="task_2">
-        <input type="checkbox" onchange="toggleTask('task_2', '03.上午 葉綠飲大水壺')">
-        <span>🍃 上午 葉綠飲大水壺</span>
-      </label>
-      <label class="tracker-item" data-key="task_3">
-        <input type="checkbox" onchange="toggleTask('task_3', '04.午餐前 舒益纖+穩控')">
-        <span>🥗 午餐前 舒益纖+穩控</span>
-      </label>
-      <label class="tracker-item" data-key="task_4">
-        <input type="checkbox" onchange="toggleTask('task_4', '05.午餐 原型輕食7分飽')">
-        <span>🍽️ 午餐 原型輕食7分飽</span>
-      </label>
-      <label class="tracker-item" data-key="task_5">
-        <input type="checkbox" onchange="toggleTask('task_5', '06.午餐後 魚油+利維可+威特倍')">
-        <span>✨ 午餐後 魚油+利維可+威特倍</span>
-      </label>
-      <label class="tracker-item" data-key="task_6">
-        <input type="checkbox" onchange="toggleTask('task_6', '07.下午茶 One Pack Juice')">
-        <span>⚡ 下午茶 One Pack Juice</span>
-      </label>
-      <label class="tracker-item" data-key="task_7">
-        <input type="checkbox" onchange="toggleTask('task_7', '08.晚餐前 益生菌 1包')">
-        <span>🍬 晚餐前 益生菌 1包</span>
-      </label>
-      <label class="tracker-item" data-key="task_8">
-        <input type="checkbox" onchange="toggleTask('task_8', '09.睡前 果然鎂+舒眠蛋白')">
-        <span>🌙 睡前 果然鎂+舒眠蛋白</span>
-      </label>
-    </div>
-
-    <div class="tracker-actions">
-      <span style="font-size:12px; color:#065F46; font-weight:800;" id="cloud-save-status">🟢 雲端試算表已連線同步</span>
-      <div style="display:flex; gap:8px;">
-        <button class="action-btn btn-sync" onclick="fetchFromSheets(true)">🔄 同步雲端</button>
-        <button class="action-btn btn-export" onclick="exportTodayLog()">📋 複製打卡</button>
-        <button class="action-btn btn-clear" onclick="resetTodayTasks()">🔄 重置勾選</button>
+      <!-- 01. 早餐 -->
+      <div class="timeline-item item-morning">
+        <div class="time-dot">🌅</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 07:30 - 08:30 早餐時段</span>
+              <div class="meal-name">晨光活力・優蛋白三果汁奶昔</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">🥤 <span class="ingredient-qty">優蛋白 2 湯匙</span>（MAXIMUM PROTEIN）</div>
+              <div class="ingredient-item">⚡ <span class="ingredient-qty">威特立 1 包</span>（VITALIFT 能量飲）</div>
+              <div class="ingredient-item">🍇 <span class="ingredient-qty">巴西莓 30cc</span> ＋ 🍍 <span class="ingredient-qty">蘿苓果 30cc</span> ＋ 🍎 <span class="ingredient-qty">紅妍金透飲 30cc</span></div>
+              <div class="ingredient-item">💧 加入 <span class="ingredient-qty">400 ~ 500 cc 溫水或常溫水</span> 搖均勻飲用</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>使用搖搖杯搖勻，果香濃郁順口，一次補足優質蛋白與三大超級水果多酚！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/combos/combo_01_breakfast_juice.jpg" alt="早餐三果汁黃金組合手牽手">
+            <span class="badge-tag">三果汁手牽手</span>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <!-- 02. 早餐後 -->
+      <div class="timeline-item item-morning">
+        <div class="time-dot">💊</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 08:45 早餐後</span>
+              <div class="meal-name">綜合維他命・全日基礎打底</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">✨ <span class="ingredient-qty">威特倍 1 包</span>（VITAPAK 綜合維生素礦物質包）</div>
+              <div class="ingredient-item">💧 搭配溫開水直接吞服（內含 6 顆膠囊）</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>一小包內含 6 顆多元微量元素膠囊，維持一整天的精神充沛與代謝運作！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/stickers/sticker_16_vitapak.jpg" alt="威特倍">
+            <span class="badge-tag">全方位基礎包</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03. 上午綠色精華 -->
+      <div class="timeline-item item-green">
+        <div class="time-dot">🍃</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 09:30 - 11:30 上午補水</span>
+              <div class="meal-name">葉綠清爽飲・體內環保大水壺</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">🌿 <span class="ingredient-qty">葉綠飲隨身包 1 包</span>（TRUGREEN+ 薄荷或萊姆風味）</div>
+              <div class="ingredient-item">🚰 沖泡於 <span class="ingredient-qty">1000 cc 大水壺</span> 當作全日水分飲用</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>1000cc 喝完後可以再回沖多一壺，或持續以純水補充水分，保持水漾循環！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/stickers/sticker_06_trugreen_mint.jpg" alt="葉綠飲">
+            <span class="badge-tag">清新大水壺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04. 午餐前 30 分鐘 -->
+      <div class="timeline-item item-noon">
+        <div class="time-dot">🥗</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 11:45 - 12:00 午餐前 30 分鐘</span>
+              <div class="meal-name">飽足順暢雙搭・餐前管理</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">🫐 <span class="ingredient-qty">舒益纖 1 包</span>（FIBER DTX 柑橘纖維）</div>
+              <div class="ingredient-item">🍓 <span class="ingredient-qty">穩控 1 包</span>（CRAVE CONTROL 草莓檸檬）</div>
+              <div class="ingredient-item">💧 倒入 <span class="ingredient-qty">300 ~ 400 cc 水</span> 攪拌均勻並立即飲用</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>高纖飽足雙拍檔手牽手！餐前 30 分鐘喝下，能有效增加飽足感，讓午餐自然吃得輕盈！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/combos/combo_02_pre_lunch.jpg" alt="餐前雙搭手牽手">
+            <span class="badge-tag">餐前雙搭手牽手</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05. 午餐後 -->
+      <div class="timeline-item item-noon">
+        <div class="time-dot">✨</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 13:00 - 13:30 午餐後</span>
+              <div class="meal-name">晶亮代謝守護・午後元氣充電</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">🐟 <span class="ingredient-qty">優美佳魚油 2 顆</span>（AC OMEGA-3 高純度魚油）</div>
+              <div class="ingredient-item">🌿 <span class="ingredient-qty">利維可 3 顆</span>（LIV-CARE 舒緩草本）</div>
+              <div class="ingredient-item">📦 <span class="ingredient-qty">威特倍 1 包</span>（VITAPAK 綜合隨身包）</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>飯後脂溶性營養素吸收最佳，幫助思緒靈活清晰、維持午後高效率！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/combos/combo_04_post_lunch.jpg" alt="午餐後守護三好友手牽手">
+            <span class="badge-tag">守護三好友手牽手</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06. 下午補充 One Pack Juice -->
+      <div class="timeline-item item-afternoon">
+        <div class="time-dot">⚡</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 15:30 - 16:30 下午茶時段</span>
+              <div class="meal-name">One Pack Juice 活力三劍客特調</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">🍊 <span class="ingredient-qty">普精耐 2 包</span>（PROARGI-9+ 柑橘莓果）</div>
+              <div class="ingredient-item">🍇 <span class="ingredient-qty">普益康 2 包</span>（PROGUARD 洋紅防護）</div>
+              <div class="ingredient-item">🍷 <span class="ingredient-qty">紅色能量 1 包</span>（SYNERBEET 甜菜根深紅）</div>
+              <div class="ingredient-item">💧 注入 <span class="ingredient-qty">1000 cc 常溫水</span>，搖勻後於 <span class="ingredient-qty">1 小時內喝完</span></div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>一氧化氮前驅物與甜菜紅素滿載！一小時內飲用完畢，迅速提振午後循環與活力！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/combos/combo_03_afternoon_power.jpg" alt="One Pack Juice三劍客手牽手">
+            <span class="badge-tag">活力三劍客手牽手</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07. 晚餐前 -->
+      <div class="timeline-item item-night">
+        <div class="time-dot">🍬</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 18:00 - 18:30 晚餐前</span>
+              <div class="meal-name">熱帶水果益生菌・好菌進駐</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">🍍 <span class="ingredient-qty">植酵複合益生菌 1 包</span>（PROBIOTIC 1000+）</div>
+              <div class="ingredient-item">👄 <strong>可以直接倒嘴巴吃</strong>，酸甜水果風味</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>直接倒入口中好吸收，或搭配常溫開水，維持消化道健康環境！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/stickers/sticker_18_probiotic.jpg" alt="益生菌">
+            <span class="badge-tag">好菌小精靈</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08. 睡前 -->
+      <div class="timeline-item item-night">
+        <div class="time-dot">🌙</div>
+        <div class="recipe-card">
+          <div class="card-info">
+            <div class="card-header">
+              <span class="time-tag">⏰ 22:30 睡前舒緩</span>
+              <div class="meal-name">晚安舒眠好夢・深層放鬆搭檔</div>
+            </div>
+            <div class="ingredient-list">
+              <div class="ingredient-item">💤 <span class="ingredient-qty">果然鎂 2 顆</span>（B-PRIME 科技放鬆鎂）</div>
+              <div class="ingredient-item">🍵 <span class="ingredient-qty">全植舒眠優蛋白 1 包</span>（GA NIGHT VEGAN 奶茶風味，若晚餐未飲用）</div>
+              <div class="ingredient-item">💧 搭配溫水服用</div>
+            </div>
+            <div class="cute-tip">
+              💡 <strong>小秘訣：</strong>鎂離子與舒眠配方能舒緩緊繃身心，提升夜間睡眠品質，做個香甜美夢！
+            </div>
+          </div>
+          <div class="card-img-box">
+            <img src="images/combos/combo_05_bedtime_sleep.jpg" alt="睡前舒眠好夢搭檔手牽手">
+            <span class="badge-tag">好夢搭檔手牽手</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 </div>
@@ -798,7 +999,6 @@ function initTracker() {
   loadTasksForDate(currentDateStr);
   fetchFromSheets();
   
-  // Auto-sync when tab becomes active / focused
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       fetchFromSheets();
@@ -809,6 +1009,22 @@ function initTracker() {
   });
 }
 
+function switchTab(tabName) {
+  document.getElementById('tab-btn-tracker').classList.remove('active');
+  document.getElementById('tab-btn-recipe').classList.remove('active');
+  document.getElementById('tab-content-tracker').classList.remove('active');
+  document.getElementById('tab-content-recipe').classList.remove('active');
+  
+  if (tabName === 'tracker') {
+    document.getElementById('tab-btn-tracker').classList.add('active');
+    document.getElementById('tab-content-tracker').classList.add('active');
+  } else {
+    document.getElementById('tab-btn-recipe').classList.add('active');
+    document.getElementById('tab-content-recipe').classList.add('active');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function loadTasksForDate(dateStr) {
   const savedData = localStorage.getItem('synergy_tracker_' + dateStr);
   const checkedMap = savedData ? JSON.parse(savedData) : {};
@@ -817,10 +1033,8 @@ function loadTasksForDate(dateStr) {
   for (let i = 0; i < TOTAL_TASKS; i++) {
     const key = 'task_' + i;
     const isChecked = checkedMap[key] === true;
-    const item = document.querySelector(`.tracker-item[data-key="${key}"]`);
+    const item = document.querySelector(`.tracker-card-item[data-key="${key}"]`);
     if (item) {
-      const chk = item.querySelector('input[type="checkbox"]');
-      chk.checked = isChecked;
       if (isChecked) {
         item.classList.add('checked');
         checkedCount++;
@@ -833,17 +1047,17 @@ function loadTasksForDate(dateStr) {
 }
 
 function toggleTask(key, taskName) {
-  const item = document.querySelector(`.tracker-item[data-key="${key}"]`);
+  const item = document.querySelector(`.tracker-card-item[data-key="${key}"]`);
   if (!item) return;
-  const chk = item.querySelector('input[type="checkbox"]');
   
-  if (chk.checked) {
+  const willCheck = !item.classList.contains('checked');
+  if (willCheck) {
     item.classList.add('checked');
   } else {
     item.classList.remove('checked');
   }
   
-  saveTasks(key, taskName, chk.checked);
+  saveTasks(key, taskName, willCheck);
 }
 
 function saveTasks(changedKey, changedTaskName, isChecked) {
@@ -851,13 +1065,10 @@ function saveTasks(changedKey, changedTaskName, isChecked) {
   let checkedCount = 0;
   for (let i = 0; i < TOTAL_TASKS; i++) {
     const key = 'task_' + i;
-    const item = document.querySelector(`.tracker-item[data-key="${key}"]`);
-    if (item) {
-      const chk = item.querySelector('input[type="checkbox"]');
-      if (chk.checked) {
-        checkedMap[key] = true;
-        checkedCount++;
-      }
+    const item = document.querySelector(`.tracker-card-item[data-key="${key}"]`);
+    if (item && item.classList.contains('checked')) {
+      checkedMap[key] = true;
+      checkedCount++;
     }
   }
   
@@ -910,12 +1121,12 @@ function resetTodayTasks() {
 }
 
 function exportTodayLog() {
-  const items = document.querySelectorAll('.tracker-item');
+  const items = document.querySelectorAll('.tracker-card-item');
   let logText = `🌸 Synergy 健康管理打卡日誌【${currentDateStr}】🌸\n`;
   items.forEach(item => {
-    const chk = item.querySelector('input[type="checkbox"]');
-    const label = item.querySelector('span').textContent;
-    logText += (chk.checked ? '✅ ' : '⬜ ') + label + '\n';
+    const isChecked = item.classList.contains('checked');
+    const label = item.querySelector('.tracker-item-title').textContent;
+    logText += (isChecked ? '✅ ' : '⬜ ') + label + '\n';
   });
   
   navigator.clipboard.writeText(logText).then(() => {
@@ -940,7 +1151,6 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
       updatedAt: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
     };
     
-    // Using text/plain prevents CORS preflight
     await fetch(sheetsApiUrl, {
       method: 'POST',
       mode: 'no-cors',
