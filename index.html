@@ -329,7 +329,7 @@ body {
 .item-night .ingredient-list { border-left-color: #485460; }
 
 /* =========================================================
-   TAB 2: 每日打卡專屬分頁 STYLES (大按鈕、極致好點)
+   TAB 2: 每日打卡專屬分頁 STYLES
    ========================================================= */
 .tracker-container {
   background: white;
@@ -426,7 +426,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Big Touch-Friendly Tracker List */
 .tracker-list {
   display: flex;
   flex-direction: column;
@@ -515,7 +514,6 @@ body {
   color: #4ADE80;
 }
 
-/* Tracker Actions Footer */
 .tracker-actions {
   display: flex;
   align-items: center;
@@ -983,6 +981,7 @@ const TOTAL_TASKS = 9;
 let currentDateStr = getTodayDateString();
 const DEFAULT_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxsAff2JnyFKrfTbDnf9mAMYrAg7C-nAFuBtZh8E_Go59OxhLVq38pNL4zldVJV8GQ_Qg/exec";
 let sheetsApiUrl = DEFAULT_SHEETS_API_URL;
+let lastUserActionTime = 0;
 
 function getTodayDateString() {
   const d = new Date();
@@ -997,15 +996,15 @@ function initTracker() {
   dateInput.value = currentDateStr;
   
   loadTasksForDate(currentDateStr);
-  fetchFromSheets();
+  fetchFromSheets(false);
   
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
-      fetchFromSheets();
+      fetchFromSheets(false);
     }
   });
   window.addEventListener('focus', () => {
-    fetchFromSheets();
+    fetchFromSheets(false);
   });
 }
 
@@ -1047,6 +1046,7 @@ function loadTasksForDate(dateStr) {
 }
 
 function toggleTask(key, taskName) {
+  lastUserActionTime = Date.now();
   const item = document.querySelector(`.tracker-card-item[data-key="${key}"]`);
   if (!item) return;
   
@@ -1073,6 +1073,7 @@ function saveTasks(changedKey, changedTaskName, isChecked) {
   }
   
   localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(checkedMap));
+  localStorage.setItem('synergy_last_modified_' + currentDateStr, Date.now().toString());
   updateProgress(checkedCount);
   showToast('💾 已儲存！');
   
@@ -1099,7 +1100,7 @@ function changeDate(offsetDays) {
   
   document.getElementById('tracker-date').value = currentDateStr;
   loadTasksForDate(currentDateStr);
-  fetchFromSheets();
+  fetchFromSheets(false);
 }
 
 function onDateChanged() {
@@ -1107,13 +1108,14 @@ function onDateChanged() {
   if (dateInput.value) {
     currentDateStr = dateInput.value;
     loadTasksForDate(currentDateStr);
-    fetchFromSheets();
+    fetchFromSheets(false);
   }
 }
 
 function resetTodayTasks() {
   if (confirm(`確定要清空 ${currentDateStr} 的打卡紀錄嗎？`)) {
     localStorage.removeItem('synergy_tracker_' + currentDateStr);
+    localStorage.setItem('synergy_last_modified_' + currentDateStr, Date.now().toString());
     loadTasksForDate(currentDateStr);
     syncToGoogleSheets({}, 'all', '重置所有項目', false);
     showToast('🔄 已重置本日紀錄');
@@ -1165,6 +1167,11 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
 }
 
 async function fetchFromSheets(showAlert=false) {
+  // If user just interacted within 10 seconds, do not let background GET overwrite local clicks
+  if (Date.now() - lastUserActionTime < 10000 && !showAlert) {
+    return;
+  }
+  
   const statusEl = document.getElementById('cloud-save-status');
   statusEl.textContent = '📊 正在從 Google 試算表讀取...';
   
@@ -1174,10 +1181,20 @@ async function fetchFromSheets(showAlert=false) {
     if (res.ok) {
       const data = await res.json();
       if (data && data.tasks) {
-        localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(data.tasks));
-        loadTasksForDate(currentDateStr);
-        statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
-        if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
+        const cloudTaskKeys = Object.keys(data.tasks);
+        const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
+        const localTasks = savedData ? JSON.parse(savedData) : {};
+        const localTaskKeys = Object.keys(localTasks);
+        
+        // Anti-wipe protection: only overwrite if cloud actually returned valid tasks OR local is empty
+        if (cloudTaskKeys.length > 0 || localTaskKeys.length === 0 || showAlert) {
+          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(data.tasks));
+          loadTasksForDate(currentDateStr);
+          statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
+          if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
+        } else {
+          statusEl.textContent = '🟢 雲端試算表已連線同步';
+        }
       }
     }
   } catch (e) {
