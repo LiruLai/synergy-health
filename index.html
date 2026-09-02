@@ -605,11 +605,15 @@ body {
 }
 
 @media (max-width: 680px) {
+  body {
+    padding: 12px 8px 60px;
+  }
   .recipe-card {
     grid-template-columns: 1fr;
+    padding: 18px 16px;
   }
   .card-img-box {
-    max-width: 240px;
+    max-width: 260px;
     margin: 0 auto;
   }
   .action-buttons-group {
@@ -619,8 +623,60 @@ body {
   .action-btn {
     flex: 1;
     justify-content: center;
-    padding: 10px 10px;
+    padding: 10px 8px;
     font-size: 13px;
+  }
+  
+  /* 手機版產品圖鑑排版優化：單欄寬敞卡片，防止文字過早換行 */
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+  .product-card {
+    border-radius: 20px;
+  }
+  .product-img-wrap {
+    height: 200px;
+    padding: 12px;
+  }
+  .product-body {
+    padding: 16px;
+  }
+  .product-header-row {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+  .product-title-zh {
+    font-size: 17px;
+    line-height: 1.35;
+  }
+  .product-title-en {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .section-text {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .usage-section .section-text {
+    font-size: 13.5px;
+  }
+  .category-filter-pills {
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .cat-pill {
+    padding: 7px 12px;
+    font-size: 12.5px;
+    border-radius: 14px;
+  }
+  .products-search-bar {
+    padding: 12px 16px;
+    border-radius: 16px;
+    margin-bottom: 14px;
+  }
+  .search-input {
+    font-size: 14px;
   }
 }
 
@@ -689,7 +745,7 @@ body {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
 
@@ -811,9 +867,12 @@ body {
 }
 
 .section-text {
-  font-size: 13px;
+  font-size: 13.5px;
   color: #4A5568;
-  line-height: 1.55;
+  line-height: 1.65;
+  letter-spacing: 0.2px;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .usage-section {
