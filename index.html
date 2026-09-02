@@ -362,38 +362,55 @@ body {
   align-items: center;
   gap: 6px;
   background: #F8FAFC;
-  padding: 4px;
-  border-radius: 16px;
-  border: 1px solid #E2E8F0;
+  padding: 5px;
+  border-radius: 18px;
+  border: 1.5px solid #E2E8F0;
+  flex-wrap: wrap;
 }
 
 .date-picker-input {
   font-family: inherit;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 800;
-  padding: 8px 12px;
+  padding: 7px 10px;
   border-radius: 12px;
-  border: none;
-  background: transparent;
+  border: 1px solid #E2E8F0;
+  background: white;
   color: #2D3748;
   outline: none;
   cursor: pointer;
+  text-align: center;
 }
 
 .date-btn {
   background: white;
   border: 1px solid #CBD5E1;
-  padding: 8px 14px;
+  padding: 7px 13px;
   border-radius: 12px;
-  font-weight: 900;
+  font-weight: 800;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #4A5568;
   transition: all 0.2s;
+  user-select: none;
 }
 
 .date-btn:hover {
   background: #EDF2F7;
+  color: #1E293B;
+}
+
+.date-btn.btn-today {
+  background: #FFF0F5;
+  color: var(--primary-pink);
+  border-color: #FFD2DC;
+  font-weight: 900;
+}
+
+.date-btn.btn-today:hover {
+  background: var(--primary-pink);
+  color: white;
+  border-color: var(--primary-pink);
 }
 
 .progress-container {
@@ -625,6 +642,31 @@ body {
     justify-content: center;
     padding: 10px 8px;
     font-size: 13px;
+  }
+  
+  /* 手機版日期控制工具列：彈性呼吸佈局，防止擠壓 */
+  .tracker-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .date-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    gap: 5px;
+  }
+  .date-picker-input {
+    flex: 1;
+    min-width: 100px;
+    font-size: 13.5px;
+    padding: 6px 2px;
+  }
+  .date-btn {
+    padding: 7px 9px;
+    font-size: 12.5px;
+    white-space: nowrap;
+    text-align: center;
   }
   
   /* 手機版產品圖鑑排版優化：單欄寬敞卡片，防止文字過早換行 */
@@ -1246,11 +1288,12 @@ body {
     <div class="tracker-container">
       
       <div class="tracker-header">
-        <div class="tracker-title">📅 今日打卡清單</div>
+        <div class="tracker-title">📅 每日服用打卡</div>
         <div class="date-controls">
-          <button class="date-btn" onclick="changeDate(-1)">◀ 前一天</button>
+          <button class="date-btn" onclick="changeDate(-1)" title="切換至前一天">◀ 前一天</button>
           <input type="date" id="tracker-date" class="date-picker-input" onchange="onDateChanged()">
-          <button class="date-btn" onclick="changeDate(1)">後一天 ▶</button>
+          <button class="date-btn" onclick="changeDate(1)" title="切換至後一天">後一天 ▶</button>
+          <button class="date-btn btn-today" onclick="goToToday()" title="快速切換回今天">🌟 今天</button>
         </div>
       </div>
 
@@ -2153,6 +2196,14 @@ function onDateChanged() {
     loadTasksForDate(currentDateStr);
     fetchFromSheets(false);
   }
+}
+
+function goToToday() {
+  currentDateStr = getTodayDateString();
+  document.getElementById('tracker-date').value = currentDateStr;
+  loadTasksForDate(currentDateStr);
+  fetchFromSheets(false);
+  showToast('📅 已切換回今天！');
 }
 
 function resetTodayTasks() {
