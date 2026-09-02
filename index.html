@@ -2024,7 +2024,6 @@ function initTracker() {
   fetchFromSheets(false);
 }
 
-
 let currentProductCategory = 'all';
 
 function switchTab(tabName) {
@@ -2041,6 +2040,8 @@ function switchTab(tabName) {
   } else if (tabName === 'tracker') {
     document.getElementById('tab-btn-tracker').classList.add('active');
     document.getElementById('tab-content-tracker').classList.add('active');
+    // 切換到打卡分頁時，立即自動向雲端同步最新進度
+    fetchFromSheets(false);
   } else if (tabName === 'products') {
     document.getElementById('tab-btn-products').classList.add('active');
     document.getElementById('tab-content-products').classList.add('active');
@@ -2048,10 +2049,10 @@ function switchTab(tabName) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function setCategoryFilter(cat) {
-  currentProductCategory = cat;
+function setCategoryFilter(category) {
+  currentProductCategory = category;
   document.querySelectorAll('.cat-pill').forEach(pill => {
-    if (pill.getAttribute('data-cat') === cat) {
+    if (pill.getAttribute('data-cat') === category) {
       pill.classList.add('active');
     } else {
       pill.classList.remove('active');
@@ -2311,23 +2312,13 @@ async function fetchFromSheets(showAlert=false) {
           loadBodyMetricsForDate(currentDateStr);
         }
         
-        // 2. 同步打卡項目
+        // 2. 核心修正：以雲端資料作為跨裝置唯一真理來源，徹底解決多裝置狀態覆蓋問題
         if (data.tasks) {
           const cloudTasks = data.tasks;
-          const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
-          const localTasks = savedData ? JSON.parse(savedData) : null;
-          
-          if (showAlert || !localTasks) {
-            localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(cloudTasks));
-            loadTasksForDate(currentDateStr);
-            statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
-            if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
-          } else {
-            let merged = { ...cloudTasks, ...localTasks };
-            localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(merged));
-            loadTasksForDate(currentDateStr);
-            statusEl.textContent = '🟢 雲端試算表已連線同步';
-          }
+          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(cloudTasks));
+          loadTasksForDate(currentDateStr);
+          statusEl.textContent = '🟢 雲端試算表已同步 (' + new Date().toLocaleTimeString() + ')';
+          if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
         }
       }
     }
@@ -2345,7 +2336,18 @@ function showToast(msg) {
   }, 2000);
 }
 
+// 頁面載入與跨分頁/視窗切換時自動同步
 window.addEventListener('DOMContentLoaded', initTracker);
+window.addEventListener('focus', () => {
+  if (document.getElementById('tab-content-tracker').classList.contains('active')) {
+    fetchFromSheets(false);
+  }
+});
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && document.getElementById('tab-content-tracker').classList.contains('active')) {
+    fetchFromSheets(false);
+  }
+});
 </script>
 
 </body>
