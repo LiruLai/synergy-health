@@ -2242,21 +2242,34 @@ async function fetchFromSheets(showAlert=false) {
     const res = await fetch(fetchUrl);
     if (res.ok) {
       const data = await res.json();
-      if (data && data.tasks) {
-        const cloudTasks = data.tasks;
-        const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
-        const localTasks = savedData ? JSON.parse(savedData) : null;
+      if (data) {
+        // 1. 同步雲端體重與體脂
+        if (data.weight !== undefined || data.bodyFat !== undefined) {
+          const currentMetrics = {
+            weight: data.weight || '',
+            bodyFat: data.bodyFat || ''
+          };
+          localStorage.setItem('synergy_metrics_' + currentDateStr, JSON.stringify(currentMetrics));
+          loadBodyMetricsForDate(currentDateStr);
+        }
         
-        if (showAlert || !localTasks) {
-          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(cloudTasks));
-          loadTasksForDate(currentDateStr);
-          statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
-          if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
-        } else {
-          let merged = { ...cloudTasks, ...localTasks };
-          localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(merged));
-          loadTasksForDate(currentDateStr);
-          statusEl.textContent = '🟢 雲端試算表已連線同步';
+        // 2. 同步打卡項目
+        if (data.tasks) {
+          const cloudTasks = data.tasks;
+          const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
+          const localTasks = savedData ? JSON.parse(savedData) : null;
+          
+          if (showAlert || !localTasks) {
+            localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(cloudTasks));
+            loadTasksForDate(currentDateStr);
+            statusEl.textContent = '🟢 已載入 Google 試算表最新狀態';
+            if (showAlert) showToast('🎉 已同步最新雲端紀錄！');
+          } else {
+            let merged = { ...cloudTasks, ...localTasks };
+            localStorage.setItem('synergy_tracker_' + currentDateStr, JSON.stringify(merged));
+            loadTasksForDate(currentDateStr);
+            statusEl.textContent = '🟢 雲端試算表已連線同步';
+          }
         }
       }
     }
