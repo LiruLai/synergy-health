@@ -1048,7 +1048,6 @@ body {
   <!-- Header Card -->
   <div class="header-card">
     <div class="header-title">🌸 Synergy 健康管理計畫 🌸</div>
-    <div class="header-subtitle">嚴選高酵營養素・按時補給・Google 試算表雲端同步</div>
   </div>
 
   <!-- Top Navigation Tabs (食譜在前面) -->
@@ -1448,12 +1447,6 @@ body {
        ========================================================= -->
   <div class="tab-content" id="tab-content-products">
     
-    <!-- 搜尋欄 -->
-    <div class="products-search-bar">
-      <span style="font-size: 18px;">🔍</span>
-      <input type="text" id="product-search-input" class="search-input" placeholder="搜尋產品名稱、成分或功效（例：魚油、精胺酸、益生菌、代謝...）" oninput="filterProducts()">
-    </div>
-
     <!-- 分類過濾按鈕 -->
     <div class="category-filter-pills">
       <div class="cat-pill active" data-cat="all" onclick="setCategoryFilter('all')">🌟 全部產品 (18)</div>
@@ -2055,7 +2048,8 @@ function setCategoryFilter(cat) {
 }
 
 function filterProducts() {
-  const query = document.getElementById('product-search-input').value.trim().toLowerCase();
+  const searchInput = document.getElementById('product-search-input');
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
   const cards = document.querySelectorAll('.product-card');
   let visibleCount = 0;
   
@@ -2080,7 +2074,7 @@ function filterProducts() {
       noResEl = document.createElement('div');
       noResEl.id = 'no-search-results';
       noResEl.className = 'no-results';
-      noResEl.innerHTML = '🍃 查無相符的產品，請嘗試搜尋其他關鍵字或切換分類！';
+      noResEl.innerHTML = '🍃 此分類下暫無產品，請切換其他分類查看！';
       document.getElementById('products-grid').appendChild(noResEl);
     }
   } else {
