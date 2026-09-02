@@ -623,6 +623,235 @@ body {
     font-size: 13px;
   }
 }
+
+/* =========================================================
+   TAB 3: 產品圖鑑百科專屬 STYLES
+   ========================================================= */
+.products-search-bar {
+  background: white;
+  border-radius: 20px;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid #FFF0F5;
+}
+
+.search-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #2D3748;
+}
+
+.search-input::placeholder {
+  color: #A0AEC0;
+}
+
+.category-filter-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.cat-pill {
+  padding: 8px 16px;
+  background: white;
+  border: 1.5px solid #EDF2F7;
+  border-radius: 16px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.cat-pill:hover {
+  background: #FFF8FA;
+  color: var(--primary-pink);
+  border-color: #FFD2DC;
+}
+
+.cat-pill.active {
+  background: linear-gradient(135deg, #FF7B9C, #FF9F43);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(255, 123, 156, 0.3);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  border: 2px solid #FFF0F5;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.09);
+  border-color: #FFD2DC;
+}
+
+.product-img-wrap {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.product-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.08));
+}
+
+.product-card:hover .product-img-wrap img {
+  transform: scale(1.06);
+}
+
+.product-type-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  color: white;
+  font-size: 11.5px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.product-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.product-title-zh {
+  font-size: 17px;
+  font-weight: 900;
+  color: #2D3748;
+  line-height: 1.3;
+}
+
+.product-dosage-pill {
+  background: #FFF0F5;
+  color: var(--primary-pink);
+  font-size: 11.5px;
+  font-weight: 900;
+  padding: 3px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.product-title-en {
+  font-size: 12px;
+  font-weight: 800;
+  color: #A0AEC0;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.product-time-tag {
+  font-size: 12px;
+  font-weight: 800;
+  color: #718096;
+  background: #F8FAFC;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.product-section {
+  margin-bottom: 10px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 900;
+  color: #4A5568;
+  margin-bottom: 3px;
+}
+
+.section-text {
+  font-size: 13px;
+  color: #4A5568;
+  line-height: 1.55;
+}
+
+.usage-section {
+  background: #F8FAFC;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border-left: 3px solid #54A0FF;
+  margin-top: auto;
+}
+
+.usage-section .section-label {
+  color: #2B6CB0;
+}
+
+.usage-section .section-text {
+  font-size: 12.5px;
+}
+
+.product-notice {
+  font-size: 11.5px;
+  color: #A0AEC0;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed #EDF2F7;
+  line-height: 1.45;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  color: #A0AEC0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
 </style>
 </head>
 <body>
@@ -642,6 +871,9 @@ body {
     </div>
     <div class="nav-tab" id="tab-btn-tracker" onclick="switchTab('tracker')">
       📋 每日服用打卡
+    </div>
+    <div class="nav-tab" id="tab-btn-products" onclick="switchTab('products')">
+      📦 產品圖鑑百科
     </div>
   </div>
 
@@ -999,6 +1231,554 @@ body {
     </div>
   </div>
 
+  <!-- =========================================================
+       TAB 3 (全新專屬分頁): 產品圖鑑百科 (去背插畫 + 功效說明)
+       ========================================================= -->
+  <div class="tab-content" id="tab-content-products">
+    
+    <!-- 搜尋欄 -->
+    <div class="products-search-bar">
+      <span style="font-size: 18px;">🔍</span>
+      <input type="text" id="product-search-input" class="search-input" placeholder="搜尋產品名稱、成分或功效（例：魚油、精胺酸、益生菌、代謝...）" oninput="filterProducts()">
+    </div>
+
+    <!-- 分類過濾按鈕 -->
+    <div class="category-filter-pills">
+      <div class="cat-pill active" data-cat="all" onclick="setCategoryFilter('all')">🌟 全部產品 (18)</div>
+      <div class="cat-pill" data-cat="morning" onclick="setCategoryFilter('morning')">🌅 早晨活力 (6)</div>
+      <div class="cat-pill" data-cat="green" onclick="setCategoryFilter('green')">🍃 清爽循環 (4)</div>
+      <div class="cat-pill" data-cat="afternoon" onclick="setCategoryFilter('afternoon')">⚡ 午後守護 (5)</div>
+      <div class="cat-pill" data-cat="night" onclick="setCategoryFilter('night')">🌙 晚安舒眠 (3)</div>
+    </div>
+
+    <!-- 產品卡片 Grid -->
+    <div class="products-grid" id="products-grid">
+
+      <div class="product-card" data-category="morning" data-keywords="紅妍金透飲 SYNEMAX 美容飲品 含蘆薈、石榴等珍貴植萃＋維生素C/B群/E及多種胺基酸，養顏美容、補充活力；添加鳳梨木瓜酵素助消化。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #FF6B8118 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_01_synemax.png" alt="紅妍金透飲" loading="lazy">
+          <span class="product-type-badge" style="background: #FF6B81;">美容飲品</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">紅妍金透飲</h3>
+            <span class="product-dosage-pill">30cc</span>
+          </div>
+          <div class="product-title-en">SYNEMAX</div>
+          <div class="product-time-tag">⏰ 建議時段：早餐時段</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">含蘆薈、石榴等珍貴植萃＋維生素C/B群/E及多種胺基酸，養顏美容、補充活力；添加鳳梨木瓜酵素助消化。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">使用前搖勻，每日1次，每次15ml，可加入果汁或常溫水中飲用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>多食無益（本計畫用量30cc略高於官方建議15ml，請依個人狀況與健康管理師確認）。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="morning" data-keywords="巴西莓綜合果汁 MISTICA 綜合果汁 巴西莓(Acai Berry)富含花青素及多種植萃，適合長時間用眼、用腦及3C使用者，協助調整體質、維持青春活力。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #8854D018 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_02_mistica.png" alt="巴西莓綜合果汁" loading="lazy">
+          <span class="product-type-badge" style="background: #8854D0;">綜合果汁</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">巴西莓綜合果汁</h3>
+            <span class="product-dosage-pill">30cc</span>
+          </div>
+          <div class="product-title-en">MISTICA</div>
+          <div class="product-time-tag">⏰ 建議時段：早餐時段</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">巴西莓(Acai Berry)富含花青素及多種植萃，適合長時間用眼、用腦及3C使用者，協助調整體質、維持青春活力。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">使用前搖勻，每次30ml，每日1–2次飲用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>天然果汁，開瓶後請冷藏保存。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="morning" data-keywords="蘿苓果綜合果汁 NONI PLUS 綜合果汁 以諾麗果(Noni)為主的綜合莓果風味果汁，搭配天然水果，協助調整體質、養顏美容、維持健康。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #FA823118 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_03_noni_plus.png" alt="蘿苓果綜合果汁" loading="lazy">
+          <span class="product-type-badge" style="background: #FA8231;">綜合果汁</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">蘿苓果綜合果汁</h3>
+            <span class="product-dosage-pill">30cc</span>
+          </div>
+          <div class="product-title-en">NONI PLUS</div>
+          <div class="product-time-tag">⏰ 建議時段：早餐時段</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">以諾麗果(Noni)為主的綜合莓果風味果汁，搭配天然水果，協助調整體質、養顏美容、維持健康。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">使用前搖勻，每次30ml，每日1–2次飲用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>天然果汁，開瓶後請冷藏保存。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="afternoon" data-keywords="普精耐隨身包 (柑橘莓果風味) PROARGI-9+ CITRUS BERRY 精胺酸補給 每包高達5000mg左旋精胺酸(L-Arginine)，一氧化氮前驅物，全球銷售第一精胺酸補充品(Euromonitor認證)；添加維生素B6/B12及葉酸。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #FC5C6518 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_04_proargi9.png" alt="普精耐隨身包 (柑橘莓果風味)" loading="lazy">
+          <span class="product-type-badge" style="background: #FC5C65;">精胺酸補給</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">普精耐隨身包 (柑橘莓果風味)</h3>
+            <span class="product-dosage-pill">2包</span>
+          </div>
+          <div class="product-title-en">PROARGI-9+ CITRUS BERRY</div>
+          <div class="product-time-tag">⏰ 建議時段：下午茶 (One Pack Juice)</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">每包高達5000mg左旋精胺酸(L-Arginine)，一氧化氮前驅物，全球銷售第一精胺酸補充品(Euromonitor認證)；添加維生素B6/B12及葉酸。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包加入120–240ml飲用水(40°C以下)攪拌均勻，建議空腹飲用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一氧化氮前驅物，建議於調配後1小時內飲用完畢。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="afternoon" data-keywords="普益康隨身包 PROARGI-9+ PROGUARD 複方保健 添加Beta-聚葡萄糖滋補強身，搭配維生素B6/C/D及鋅，並含石榴、紅葡萄、蘋果、葡萄籽、柑橘等多種植物精華。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #A55EEA18 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_05_proguard.png" alt="普益康隨身包" loading="lazy">
+          <span class="product-type-badge" style="background: #A55EEA;">複方保健</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">普益康隨身包</h3>
+            <span class="product-dosage-pill">2包</span>
+          </div>
+          <div class="product-title-en">PROARGI-9+ PROGUARD</div>
+          <div class="product-time-tag">⏰ 建議時段：下午茶 (One Pack Juice)</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">添加Beta-聚葡萄糖滋補強身，搭配維生素B6/C/D及鋅，並含石榴、紅葡萄、蘋果、葡萄籽、柑橘等多種植物精華。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包(4.4g)加入約250ml水攪拌溶解後盡速飲用，一天1次，多食無益。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一天1次，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="green" data-keywords="葉綠飲隨身包 (薄荷風味) TRU GREEN+ SPEARMINT 機能飲品 水溶性葉綠素來源，新增膳食纖維-菊糖，促進腸道蠕動、增加飽足感，天天補充天然綠色力量。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #20BF6B18 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_06_trugreen_mint.png" alt="葉綠飲隨身包 (薄荷風味)" loading="lazy">
+          <span class="product-type-badge" style="background: #20BF6B;">機能飲品</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">葉綠飲隨身包 (薄荷風味)</h3>
+            <span class="product-dosage-pill">1包 ＋ 1000cc水</span>
+          </div>
+          <div class="product-title-en">TRU GREEN+ SPEARMINT</div>
+          <div class="product-time-tag">⏰ 建議時段：上午補水</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">水溶性葉綠素來源，新增膳食纖維-菊糖，促進腸道蠕動、增加飽足感，天天補充天然綠色力量。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包(2.2g)加入約450ml水攪拌溶解後盡速飲用，本計畫加大稀釋至1000cc當水喝一整天。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一天1次，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="green" data-keywords="葉綠飲隨身包 (萊姆風味) TRU GREEN+ LIME 機能飲品 清香萊姆風味水溶性葉綠素，搭配天然水溶性纖維，使排便順暢、調整體質、清新口氣。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #26DE8118 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_07_trugreen_lime.png" alt="葉綠飲隨身包 (萊姆風味)" loading="lazy">
+          <span class="product-type-badge" style="background: #26DE81;">機能飲品</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">葉綠飲隨身包 (萊姆風味)</h3>
+            <span class="product-dosage-pill">1包 ＋ 1000cc水</span>
+          </div>
+          <div class="product-title-en">TRU GREEN+ LIME</div>
+          <div class="product-time-tag">⏰ 建議時段：上午補水</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">清香萊姆風味水溶性葉綠素，搭配天然水溶性纖維，使排便順暢、調整體質、清新口氣。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包(2.2g)加入約450ml水攪拌溶解後盡速飲用，本計畫加大稀釋至1000cc當水喝一整天。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一天1次，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="green" data-keywords="穩控隨身包 CRAVE CONTROL 體重管理 馬鈴薯萃取物＋吡啶甲酸鉻(助醣類代謝)＋葡萄皮萃取物＋果寡糖，協助控制對零食甜食的渴望。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #45AAF218 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_08_crave_control.png" alt="穩控隨身包" loading="lazy">
+          <span class="product-type-badge" style="background: #45AAF2;">體重管理</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">穩控隨身包</h3>
+            <span class="product-dosage-pill">1包</span>
+          </div>
+          <div class="product-title-en">CRAVE CONTROL</div>
+          <div class="product-time-tag">⏰ 建議時段：午餐前 30 分鐘</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">馬鈴薯萃取物＋吡啶甲酸鉻(助醣類代謝)＋葡萄皮萃取物＋果寡糖，協助控制對零食甜食的渴望。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包加入約450ml水攪拌溶解後盡速飲用，一天1次，多食無益。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一天1次，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="green" data-keywords="舒益纖隨身包 FIBER DTX 膳食纖維 洋車前子等多元膳食纖維來源(含蘋果纖維、亞麻仁籽)，補足現代人普遍不足的膳食纖維攝取，並添加麩醯胺酸、氧化鋅。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #4B7BEC18 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_09_fiber_dtx.png" alt="舒益纖隨身包" loading="lazy">
+          <span class="product-type-badge" style="background: #4B7BEC;">膳食纖維</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">舒益纖隨身包</h3>
+            <span class="product-dosage-pill">1包</span>
+          </div>
+          <div class="product-title-en">FIBER DTX</div>
+          <div class="product-time-tag">⏰ 建議時段：午餐前 30 分鐘</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">洋車前子等多元膳食纖維來源(含蘋果纖維、亞麻仁籽)，補足現代人普遍不足的膳食纖維攝取，並添加麩醯胺酸、氧化鋅。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包(約6.6g)沖泡250ml白開水(40°C以下)攪拌溶解，每日2–4次，多食無益。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>沖泡後請盡快飲用，避免纖維凝膠化。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="morning" data-keywords="威特立能量補給飲品 VITALIFT 能量飲品 含瓜拿納萃取咖啡因(60mg)＋維生素B群，促進新陳代謝、提振精神活力；綠茶及葡萄皮萃取物協助調整體質。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #FED33018 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_10_vitalift.png" alt="威特立能量補給飲品" loading="lazy">
+          <span class="product-type-badge" style="background: #FED330;">能量飲品</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">威特立能量補給飲品</h3>
+            <span class="product-dosage-pill">1包</span>
+          </div>
+          <div class="product-title-en">VITALIFT</div>
+          <div class="product-time-tag">⏰ 建議時段：早餐時段</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">含瓜拿納萃取咖啡因(60mg)＋維生素B群，促進新陳代謝、提振精神活力；綠茶及葡萄皮萃取物協助調整體質。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包粉末加入250–500ml白開水(40°C以下)或牛奶攪拌溶解飲用，加冰塊風味更佳。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一天1次，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="night" data-keywords="果然鎂膠囊 B-PRIME 礦物質 2顆含420mg鎂，參與體內300多種酵素反應，助醣類代謝、骨骼牙齒發育及心臟肌肉神經正常功能；添加蘋果果膠及歐洲李助排便順暢。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #3867D618 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_11_b_prime.png" alt="果然鎂膠囊" loading="lazy">
+          <span class="product-type-badge" style="background: #3867D6;">礦物質</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">果然鎂膠囊</h3>
+            <span class="product-dosage-pill">2顆</span>
+          </div>
+          <div class="product-title-en">B-PRIME</div>
+          <div class="product-time-tag">⏰ 建議時段：睡前時段</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">2顆含420mg鎂，參與體內300多種酵素反應，助醣類代謝、骨骼牙齒發育及心臟肌肉神經正常功能；添加蘋果果膠及歐洲李助排便順暢。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">每次2顆，每日1次，睡前搭配開水食用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一日請勿超過2顆，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="afternoon" data-keywords="利維可膠囊食品 LIV-CARE 肝臟保養 朝鮮薊、五味子、薑黃等植萃＋鋅、維生素B1/B2/B6/B12及L-蛋胺酸，協助調節生理機能、促進新陳代謝，適合日常保養。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #2BCBBA18 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_12_liv_care.png" alt="利維可膠囊食品" loading="lazy">
+          <span class="product-type-badge" style="background: #2BCBBA;">肝臟保養</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">利維可膠囊食品</h3>
+            <span class="product-dosage-pill">3顆</span>
+          </div>
+          <div class="product-title-en">LIV-CARE</div>
+          <div class="product-time-tag">⏰ 建議時段：午餐後</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">朝鮮薊、五味子、薑黃等植萃＋鋅、維生素B1/B2/B6/B12及L-蛋胺酸，協助調節生理機能、促進新陳代謝，適合日常保養。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">每次3顆，每日1次，一日請勿超過3顆。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一日請勿超過3顆，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="afternoon" data-keywords="優美佳魚油膠囊 AC OMEGA-3 高純度魚油 深海魚油，每份(2顆)含逾1300mg Omega-3(EPA 658mg+DHA 492mg)，rTG型態、微粒子科技提升吸收率，調節生理機能。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #EB3B5A18 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_13_ac_omega3.png" alt="優美佳魚油膠囊" loading="lazy">
+          <span class="product-type-badge" style="background: #EB3B5A;">高純度魚油</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">優美佳魚油膠囊</h3>
+            <span class="product-dosage-pill">2顆</span>
+          </div>
+          <div class="product-title-en">AC OMEGA-3</div>
+          <div class="product-time-tag">⏰ 建議時段：午餐後</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">深海魚油，每份(2顆)含逾1300mg Omega-3(EPA 658mg+DHA 492mg)，rTG型態、微粒子科技提升吸收率，調節生理機能。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">每天1次，每次2顆，於飯後食用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一日請勿超過2顆，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="morning" data-keywords="優蛋白粉末食品 (巧克力風味) MAXIMUM PROTEIN POUCH 優質蛋白粉 濃縮乳清蛋白＋分離乳清蛋白＋酪蛋白配方，每份含23g優質蛋白，補充肌肉合成原料；添加牛磺酸。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #4B658418 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_14_maximum_protein.png" alt="優蛋白粉末食品 (巧克力風味)" loading="lazy">
+          <span class="product-type-badge" style="background: #4B6584;">優質蛋白粉</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">優蛋白粉末食品 (巧克力風味)</h3>
+            <span class="product-dosage-pill">2湯匙 (約35.5g)</span>
+          </div>
+          <div class="product-title-en">MAXIMUM PROTEIN POUCH</div>
+          <div class="product-time-tag">⏰ 建議時段：早餐時段</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">濃縮乳清蛋白＋分離乳清蛋白＋酪蛋白配方，每份含23g優質蛋白，補充肌肉合成原料；添加牛磺酸。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">取2匙（約35.5g）加入240ml白開水或40°C以下牛奶，攪拌均勻飲用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>官方未特別限制上限（依熱量140kcal/份自行拿捏）。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="night" data-keywords="全植舒眠優蛋白 (奶茶風味) GA NIGHT VEGAN PROTEIN DRINK 植物蛋白／助眠 全素大豆＋豌豆分離蛋白，每包20g優質蛋白，添加GABA(麩胺酸發酵物)、L-白胺酸及中鏈脂肪酸，無乳糖無膽固醇、低糖配方。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #778CA318 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_15_ga_night_vegan.png" alt="全植舒眠優蛋白 (奶茶風味)" loading="lazy">
+          <span class="product-type-badge" style="background: #778CA3;">植物蛋白／助眠</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">全植舒眠優蛋白 (奶茶風味)</h3>
+            <span class="product-dosage-pill">1包</span>
+          </div>
+          <div class="product-title-en">GA NIGHT VEGAN PROTEIN DRINK</div>
+          <div class="product-time-tag">⏰ 建議時段：晚餐或睡前</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">全素大豆＋豌豆分離蛋白，每包20g優質蛋白，添加GABA(麩胺酸發酵物)、L-白胺酸及中鏈脂肪酸，無乳糖無膽固醇、低糖配方。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">1包加入240ml白開水或40°C以下牛奶攪拌均勻飲用，多食無益。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="morning" data-keywords="威特倍綜合維生素礦物質 VITAPAK 綜合維生素 一次補充17種關鍵維生素及礦物質＋11種天然植萃，適合三餐不均衡的現代人，穩固日常營養基礎。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #2D98DA18 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_16_vitapak.png" alt="威特倍綜合維生素礦物質" loading="lazy">
+          <span class="product-type-badge" style="background: #2D98DA;">綜合維生素</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">威特倍綜合維生素礦物質</h3>
+            <span class="product-dosage-pill">1包 (6顆)</span>
+          </div>
+          <div class="product-title-en">VITAPAK</div>
+          <div class="product-time-tag">⏰ 建議時段：早餐後 / 午餐後</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">一次補充17種關鍵維生素及礦物質＋11種天然植萃，適合三餐不均衡的現代人，穩固日常營養基礎。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">每次1包(6顆膠囊)，每日2次，一日請勿超過2包。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>一日請勿超過2包，多食無益。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="afternoon" data-keywords="紅色能量隨身包 SYNERBEET 運動能量 甜菜根萃取，硝酸鹽可轉化為一氧化氮增強體力，甜菜紅素為天然色素營養素，並含鉀有助降鈉。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #B3393918 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_17_synerbeet.png" alt="紅色能量隨身包" loading="lazy">
+          <span class="product-type-badge" style="background: #B33939;">運動能量</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">紅色能量隨身包</h3>
+            <span class="product-dosage-pill">1包</span>
+          </div>
+          <div class="product-title-en">SYNERBEET</div>
+          <div class="product-time-tag">⏰ 建議時段：下午茶 (One Pack Juice)</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">甜菜根萃取，硝酸鹽可轉化為一氧化氮增強體力，甜菜紅素為天然色素營養素，並含鉀有助降鈉。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">每日1包，加入400ml白開水(40°C以下)攪拌均勻飲用。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>每日1包。
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="night" data-keywords="植酵複合益生菌粉末食品 PROBIOTIC 1000+ 複合益生菌 出廠1000億菌／8種優質菌株，添加黃金益生質提升定殖力，並含88種發酵彩虹蔬果植化素及消化酵素。">
+        <div class="product-img-wrap" style="background: radial-gradient(circle, #10AC8418 0%, #FAFAFD 75%);">
+          <img src="images/stickers/sticker_18_probiotic_1000.png" alt="植酵複合益生菌粉末食品" loading="lazy">
+          <span class="product-type-badge" style="background: #10AC84;">複合益生菌</span>
+        </div>
+        <div class="product-body">
+          <div class="product-header-row">
+            <h3 class="product-title-zh">植酵複合益生菌粉末食品</h3>
+            <span class="product-dosage-pill">1包</span>
+          </div>
+          <div class="product-title-en">PROBIOTIC 1000+</div>
+          <div class="product-time-tag">⏰ 建議時段：晚餐前</div>
+          
+          <div class="product-section">
+            <div class="section-label">✨ 主要功效與成分</div>
+            <p class="section-text">出廠1000億菌／8種優質菌株，添加黃金益生質提升定殖力，並含88種發酵彩虹蔬果植化素及消化酵素。</p>
+          </div>
+          
+          <div class="product-section usage-section">
+            <div class="section-label">🥤 官方使用方式</div>
+            <p class="section-text">每日1包，可直接食用或以冷水／果汁沖泡，勿以超過40°C熱水沖泡。</p>
+          </div>
+          
+          <div class="product-notice">
+            💡 <strong>注意事項：</strong>每日1包，可直接倒入口中食用。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <div class="toast" id="toast-msg">已儲存！</div>
@@ -1026,21 +1806,76 @@ function initTracker() {
   fetchFromSheets(false);
 }
 
+
+let currentProductCategory = 'all';
+
 function switchTab(tabName) {
   document.getElementById('tab-btn-recipe').classList.remove('active');
   document.getElementById('tab-btn-tracker').classList.remove('active');
+  document.getElementById('tab-btn-products').classList.remove('active');
   document.getElementById('tab-content-recipe').classList.remove('active');
   document.getElementById('tab-content-tracker').classList.remove('active');
+  document.getElementById('tab-content-products').classList.remove('active');
   
   if (tabName === 'recipe') {
     document.getElementById('tab-btn-recipe').classList.add('active');
     document.getElementById('tab-content-recipe').classList.add('active');
-  } else {
+  } else if (tabName === 'tracker') {
     document.getElementById('tab-btn-tracker').classList.add('active');
     document.getElementById('tab-content-tracker').classList.add('active');
+  } else if (tabName === 'products') {
+    document.getElementById('tab-btn-products').classList.add('active');
+    document.getElementById('tab-content-products').classList.add('active');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function setCategoryFilter(cat) {
+  currentProductCategory = cat;
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    if (pill.getAttribute('data-cat') === cat) {
+      pill.classList.add('active');
+    } else {
+      pill.classList.remove('active');
+    }
+  });
+  filterProducts();
+}
+
+function filterProducts() {
+  const query = document.getElementById('product-search-input').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.product-card');
+  let visibleCount = 0;
+  
+  cards.forEach(card => {
+    const cat = card.getAttribute('data-category');
+    const keywords = card.getAttribute('data-keywords').toLowerCase();
+    
+    const matchesCat = (currentProductCategory === 'all' || cat === currentProductCategory);
+    const matchesQuery = (!query || keywords.includes(query));
+    
+    if (matchesCat && matchesQuery) {
+      card.style.display = 'flex';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  let noResEl = document.getElementById('no-search-results');
+  if (visibleCount === 0) {
+    if (!noResEl) {
+      noResEl = document.createElement('div');
+      noResEl.id = 'no-search-results';
+      noResEl.className = 'no-results';
+      noResEl.innerHTML = '🍃 查無相符的產品，請嘗試搜尋其他關鍵字或切換分類！';
+      document.getElementById('products-grid').appendChild(noResEl);
+    }
+  } else {
+    if (noResEl) noResEl.remove();
+  }
+}
+
 
 function loadTasksForDate(dateStr) {
   const savedData = localStorage.getItem('synergy_tracker_' + dateStr);
