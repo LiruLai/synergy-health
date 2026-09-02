@@ -911,6 +911,92 @@ body {
   font-weight: 800;
 }
 
+/* =========================================================
+   今日體態數據記錄區塊 STYLES
+   ========================================================= */
+.body-metrics-card {
+  background: linear-gradient(135deg, #FFF0F5 0%, #F8FAFC 100%);
+  border-radius: 20px;
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  border: 2px solid #FFD2DC;
+  box-shadow: 0 4px 14px rgba(255, 123, 156, 0.08);
+}
+
+.metrics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.metrics-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.metric-input-group {
+  background: white;
+  border-radius: 16px;
+  padding: 10px 14px;
+  border: 1.5px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+}
+
+.metric-input-group:focus-within {
+  border-color: var(--primary-pink);
+  box-shadow: 0 0 0 3px rgba(255, 123, 156, 0.15);
+}
+
+.metric-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #718096;
+  margin-bottom: 2px;
+}
+
+.metric-input-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.metric-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text-dark);
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+}
+
+.metric-unit {
+  font-size: 13px;
+  font-weight: 800;
+  color: #A0AEC0;
+}
+
+@media (max-width: 680px) {
+  .metrics-grid {
+    gap: 8px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1171,6 +1257,30 @@ body {
       <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
         <div class="progress-text" id="progress-text">今日達成率 0% (0/11)</div>
+      </div>
+
+      <!-- 今日體態數據記錄 -->
+      <div class="body-metrics-card">
+        <div class="metrics-header">
+          <div class="metrics-title">⚖️ 今日體態記錄</div>
+          <span style="font-size: 12px; color: #A0AEC0; font-weight: 700;">自動即時儲存</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-input-group">
+            <span class="metric-label">⚖️ 今日體重</span>
+            <div class="metric-input-wrapper">
+              <input type="number" step="0.1" inputmode="decimal" id="metric-weight" class="metric-input" placeholder="0.0" onchange="saveBodyMetrics()">
+              <span class="metric-unit">kg</span>
+            </div>
+          </div>
+          <div class="metric-input-group">
+            <span class="metric-label">📊 今日體脂率</span>
+            <div class="metric-input-wrapper">
+              <input type="number" step="0.1" inputmode="decimal" id="metric-fat" class="metric-input" placeholder="0.0" onchange="saveBodyMetrics()">
+              <span class="metric-unit">%</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="tracker-list" id="tracker-list">
@@ -1936,7 +2046,29 @@ function filterProducts() {
 }
 
 
+function loadBodyMetricsForDate(dateStr) {
+  const savedMetrics = localStorage.getItem('synergy_metrics_' + dateStr);
+  const data = savedMetrics ? JSON.parse(savedMetrics) : {};
+  document.getElementById('metric-weight').value = data.weight || '';
+  document.getElementById('metric-fat').value = data.bodyFat || '';
+}
+
+function saveBodyMetrics() {
+  const weight = document.getElementById('metric-weight').value.trim();
+  const bodyFat = document.getElementById('metric-fat').value.trim();
+  
+  const metrics = { weight, bodyFat };
+  localStorage.setItem('synergy_metrics_' + currentDateStr, JSON.stringify(metrics));
+  showToast('⚖️ 體態數據已儲存！');
+  
+  // 觸發雲端同步
+  const savedData = localStorage.getItem('synergy_tracker_' + currentDateStr);
+  const checkedMap = savedData ? JSON.parse(savedData) : {};
+  syncToGoogleSheets(checkedMap, 'metrics_update', '更新體重體脂數據', true);
+}
+
 function loadTasksForDate(dateStr) {
+  loadBodyMetricsForDate(dateStr);
   const savedData = localStorage.getItem('synergy_tracker_' + dateStr);
   const checkedMap = savedData ? JSON.parse(savedData) : {};
   
@@ -2026,6 +2158,7 @@ function onDateChanged() {
 function resetTodayTasks() {
   if (confirm(`確定要清空 ${currentDateStr} 的打卡紀錄嗎？`)) {
     localStorage.removeItem('synergy_tracker_' + currentDateStr);
+    localStorage.removeItem('synergy_metrics_' + currentDateStr);
     localStorage.removeItem('synergy_user_updated_' + currentDateStr);
     loadTasksForDate(currentDateStr);
     syncToGoogleSheets({}, 'all', '重置所有項目', false);
@@ -2036,6 +2169,18 @@ function resetTodayTasks() {
 function exportTodayLog() {
   const items = document.querySelectorAll('.tracker-card-item');
   let logText = `🌸 Synergy 健康管理打卡日誌【${currentDateStr}】🌸\n`;
+  
+  const weight = document.getElementById('metric-weight').value.trim();
+  const bodyFat = document.getElementById('metric-fat').value.trim();
+  
+  let metricsSummary = [];
+  if (weight) metricsSummary.push(`⚖️ 體重: ${weight}kg`);
+  if (bodyFat) metricsSummary.push(`📊 體脂: ${bodyFat}%`);
+  if (metricsSummary.length > 0) {
+    logText += metricsSummary.join(' ｜ ') + '\n';
+    logText += '-------------------------\n';
+  }
+  
   items.forEach(item => {
     const isChecked = item.classList.contains('checked');
     const label = item.querySelector('.tracker-item-title').textContent;
@@ -2043,7 +2188,7 @@ function exportTodayLog() {
   });
   
   navigator.clipboard.writeText(logText).then(() => {
-    showToast('📋 已複製今日打卡文字至剪貼簿！');
+    showToast('📋 已複製今日打卡與體態文字至剪貼簿！');
   }).catch(() => {
     alert(logText);
   });
@@ -2055,6 +2200,9 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
   isSaving = true;
   
   try {
+    const savedMetrics = localStorage.getItem('synergy_metrics_' + currentDateStr);
+    const metricsData = savedMetrics ? JSON.parse(savedMetrics) : {};
+    
     const payload = {
       action: 'save',
       date: currentDateStr,
@@ -2062,6 +2210,9 @@ async function syncToGoogleSheets(checkedMap, changedKey, changedTaskName, isChe
       changedTaskName: changedTaskName,
       isChecked: isChecked,
       tasks: checkedMap,
+      metrics: metricsData,
+      weight: metricsData.weight || '',
+      bodyFat: metricsData.bodyFat || '',
       updatedAt: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
     };
     
